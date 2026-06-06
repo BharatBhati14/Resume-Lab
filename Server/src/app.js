@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import authRouter from "./routes/auth.route.js";
+import resumeRouter from "./routes/resume.route.js";
 
 const app = express();
 
@@ -28,5 +29,8 @@ app.get("/api/health", (req, res) => {
 
 // Auth Routes
 app.use("/api/auth", authRouter);
+
+// Resume Routes
+app.use("/api/resumes", resumeRouter)
 
 export default app;
