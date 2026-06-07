@@ -31,6 +31,6 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", authRouter);
 
 // Resume Routes
-app.use("/api/resumes", resumeRouter)
+app.use("/api/ai/resumes", resumeRouter)
 
 export default app;
