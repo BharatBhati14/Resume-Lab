@@ -16,13 +16,13 @@ export const generateResumePrompt = (profile) => {
                 "company": "",
                 "startDate": "",
                 "endDate": "",
-                "description": ""
+                "description": ["bullets"]
                 }
             ],
             "projects": [
                 {
                 "name": "",
-                "description": "",
+                "description": ["bullets"],
                 "technologies": []
                 }
             ],

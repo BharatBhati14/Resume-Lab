@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import authRouter from "./routes/auth.route.js";
 import resumeRouter from "./routes/resume.route.js";
+import ProfileRouter from "./routes/profile.route.js";
 
 const app = express();
 
@@ -32,5 +33,8 @@ app.use("/api/auth", authRouter);
 
 // Resume Routes
 app.use("/api/ai/resumes", resumeRouter)
+
+// Profile Routes
+app.use("/api/profile", ProfileRouter)
 
 export default app;

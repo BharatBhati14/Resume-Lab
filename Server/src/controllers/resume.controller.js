@@ -10,12 +10,12 @@ import { generateGeminiResumeContent } from "../services/gemini.service.js";
 export const generateResume = async (req, res) => {
   try {
 
-    if (!req.body) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
+    // if (!req.body) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "All fields are required",
+    //   });
+    // }
 
     const prompt = generateResumePrompt(req.body);
 
@@ -35,3 +35,15 @@ export const generateResume = async (req, res) => {
   }
 
 };
+
+/**
+ *  POST  /api/ai/resumes/save
+ */
+
+export const saveResume = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const personalInfoSchema = new mongoose.Schema(
   {
@@ -29,10 +29,7 @@ const experienceSchema = new mongoose.Schema(
       default: false,
     },
 
-    bullets: {
-      type: [String],
-      default: [],
-    },
+    description: String,
 
     technologies: {
       type: [String],
@@ -46,16 +43,10 @@ const projectSchema = new mongoose.Schema(
   {
     name: { type: String, trim: true },
 
-    liveUrl: { type: String, trim: true },
-    githubUrl: { type: String, trim: true },
+    description: String,
 
-    startDate: Date,
-    endDate: Date,
-
-    descBullets: {
-      type: [String],
-      default: [],
-    },
+    liveUrl: String,
+    githubUrl: String,
 
     technologies: {
       type: [String],
@@ -132,36 +123,19 @@ const skillsSchema = new mongoose.Schema(
   { _id: false },
 );
 
-const resumeSchema = new mongoose.Schema(
+const profileSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      unique: true,
       index: true,
-    },
-
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    status: {
-      type: String,
-      enum: ["draft", "completed"],
-      default: "draft",
     },
 
     personalInfo: {
       type: personalInfoSchema,
       default: () => ({}),
-    },
-
-    summary: {
-      type: String,
-      trim: true,
-      default: "",
     },
 
     experience: {
@@ -193,19 +167,8 @@ const resumeSchema = new mongoose.Schema(
       type: [languageSchema],
       default: [],
     },
-
-    templateId: {
-      type: String,
-      default: null,
-    },
-
-    isPublic: {
-      type: Boolean,
-      default: false,
-    },
-
-    atsScore: {
-      type: Number,
+    lastResumeGeneratedAt: {
+      type: Date,
       default: null,
     },
   },
@@ -214,6 +177,6 @@ const resumeSchema = new mongoose.Schema(
   },
 );
 
-const resumeModel = mongoose.model("Resume", resumeSchema);
+const profileModel = mongoose.model("Profile", profileSchema);
 
-export default resumeModel;
+export default profileModel;
