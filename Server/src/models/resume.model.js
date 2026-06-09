@@ -18,18 +18,23 @@ const personalInfoSchema = new mongoose.Schema(
 const experienceSchema = new mongoose.Schema(
   {
     company: { type: String, trim: true },
-    role: { type: String, trim: true },
+    jobTitle: { type: String, trim: true },
     location: { type: String, trim: true },
 
     startDate: Date,
-    endDate: Date,
 
     isCurrent: {
       type: Boolean,
       default: false,
     },
+    endDate: {
+      type: Date,
+      required: function () {
+        return !this.isCurrent;
+      },
+    },
 
-    bullets: {
+    description: {
       type: [String],
       default: [],
     },
@@ -52,7 +57,7 @@ const projectSchema = new mongoose.Schema(
     startDate: Date,
     endDate: Date,
 
-    descBullets: {
+    description: {
       type: [String],
       default: [],
     },
@@ -174,14 +179,14 @@ const resumeSchema = new mongoose.Schema(
       default: [],
     },
 
-    education: {
-      type: [educationSchema],
-      default: [],
-    },
-
     skills: {
       type: skillsSchema,
       default: () => ({}),
+    },
+
+    education: {
+      type: [educationSchema],
+      default: [],
     },
 
     certifications: {
