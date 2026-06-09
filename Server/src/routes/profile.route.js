@@ -1,10 +1,13 @@
 import express from "express"
 import { authMiddleware } from "../middlewares/auth.middleware.js";
-import { createProfile } from "../controllers/profile.controller.js";
+import { createProfile, getProfile } from "../controllers/profile.controller.js";
 
-const ProfileRouter = express.Router();
+const profileRouter = express.Router();
 
 // POST   /api/profile
-ProfileRouter.post("/", authMiddleware, createProfile)
+profileRouter.post("/", authMiddleware, createProfile);
 
-export default ProfileRouter;
+//  GET    /api/profile
+profileRouter.get("/", authMiddleware, getProfile);
+
+export default profileRouter;
