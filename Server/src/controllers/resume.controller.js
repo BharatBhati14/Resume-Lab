@@ -82,7 +82,7 @@ export const saveResume = async (req, res) => {
 /**
  *  
  */
-export const updateResumeSection = async (req, res) => {
+export const regenerateResumeSection = async (req, res) => {
   try {
     const { resumeContent, resumeSectionToUpdate } = req.body;
     if(!resumeContent || !resumeSectionToUpdate) {

@@ -1,6 +1,6 @@
 import express from "express"
 import { authMiddleware } from "../middlewares/auth.middleware.js";
-import {generateResume, saveResume, updateResumeSection } from "../controllers/resume.controller.js";
+import { generateResume, regenerateResumeSection, saveResume } from "../controllers/resume.controller.js";
 
 const resumeRouter = express.Router();
 
@@ -11,6 +11,6 @@ resumeRouter.post("/generate", authMiddleware, generateResume);
 resumeRouter.post("/save", authMiddleware, saveResume);
 
 // POST   /api/ai/resumes/regenerate
-resumeRouter.post("/regenerate", authMiddleware, updateResumeSection);
+resumeRouter.post("/regenerate", authMiddleware, regenerateResumeSection);
 
 export default resumeRouter;
