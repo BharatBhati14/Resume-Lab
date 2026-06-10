@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import resumeModel from "../models/resume.model.js";
 import { generateResumePrompt } from "../services/resumeGeneration.prompt.js";
 import { generateGeminiResumeContent } from "../services/gemini.service.js";
+import { generateResumeSectionPrompt } from "../services/resumeSectionGeneration.prompt.js";
 
 /**
  *  POST  /api/ai/resumes/generate
@@ -74,6 +75,37 @@ export const saveResume = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: `Error saving resume: ${error.message}`,
+    });
+  }
+}
+
+/**
+ *  
+ */
+export const updateResumeSection = async (req, res) => {
+  try {
+    const { resumeContent, resumeSectionToUpdate } = req.body;
+    if(!resumeContent || !resumeSectionToUpdate) {
+      return res.status(401).json({
+      success: false,
+      message: "Some fields are missing"
+    });
+    }
+
+    const prompt = generateResumeSectionPrompt( resumeContent, resumeSectionToUpdate );
+
+    const response = await generateGeminiResumeContent(prompt);
+
+    const result = JSON.parse(response);
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Section Generation Error: ${error.message}`,
     });
   }
 }
