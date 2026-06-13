@@ -1,408 +1,251 @@
-// import { Link } from "react-router-dom";
+import heroImg from "../assets/heroimg.jpeg";
+import { useState } from "react";
 
-// export default function HomePage() {
-//   return (
-//     <div className="bg-white text-gray-900">
-//       {/* NAVBAR */}
-//       <header className="flex items-center justify-between px-6 py-4 shadow-sm">
-//         <h1 className="text-xl font-bold">
-//           ResumeLab
-//         </h1>
+const HomePage = () => {
+  const features = [
+    {
+      // icon: <Wand2 size={28} />,
+      title: "AI Resume Generator",
+      desc: "Create professional resumes instantly using AI.",
+    },
+    {
+      // icon: <FileText size={28} />,
+      title: "ATS Optimization",
+      desc: "Improve your chances of passing ATS filters.",
+    },
+    {
+      // icon: <Briefcase size={28} />,
+      title: "Job-Specific Resume",
+      desc: "Tailor resumes for each application automatically.",
+    },
+    {
+      // icon: <MessageSquare size={28} />,
+      title: "AI Cover Letters",
+      desc: "Generate compelling cover letters in seconds.",
+    },
+  ];
 
-//         <nav className="flex items-center gap-6 text-sm">
-//           <a href="#features" className="hover:text-blue-600">
-//             Features
-//           </a>
-//           <a href="#templates" className="hover:text-blue-600">
-//             Templates
-//           </a>
-//           <a href="#pricing" className="hover:text-blue-600">
-//             Pricing
-//           </a>
+  const faqs = [
+    {
+      q: "Is the AI resume builder free?",
+      a: "Yes, you can create and edit resumes for free with premium upgrades available.",
+    },
+    {
+      q: "Are templates ATS-friendly?",
+      a: "All templates are optimized for Applicant Tracking Systems.",
+    },
+    {
+      q: "Can I download as PDF?",
+      a: "Yes, export your resume in PDF format instantly.",
+    },
+    {
+      q: "Can AI generate cover letters?",
+      a: "Absolutely. AI can create personalized cover letters based on your resume.",
+    },
+  ];
 
-//           <Link
-//             to="/login"
-//             className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-//           >
-//             Login
-//           </Link>
-//         </nav>
-//       </header>
+  function FAQItem({ item }) {
+    const [open, setOpen] = useState(false);
 
-//       {/* HERO SECTION */}
-//       <section className="px-6 py-20 text-center bg-linear-to-b from-blue-50 to-white">
-//         <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-//           Build ATS-Friendly Resumes <br />
-//           with AI in Minutes
-//         </h2>
+    return (
+      <div className="border-b py-6">
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full flex justify-between"
+        >
+          <span>{item.q}</span>
 
-//         <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
-//           ResumeLab helps you create professional resumes, improve content with AI,
-//           and land your dream job faster. No design skills needed.
-//         </p>
+          <span>{open ? "-" : "+"}</span>
+        </button>
 
-//         <div className="mt-8 flex justify-center gap-4">
-//           <Link
-//             to="/login"
-//             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-//           >
-//             Get Started Free
-//           </Link>
+        {open && <p className="mt-4 text-slate-600">{item.a}</p>}
+      </div>
+    );
+  }
 
-//           <a
-//             href="#features"
-//             className="px-6 py-3 border rounded-lg hover:bg-gray-100"
-//           >
-//             Learn More
-//           </a>
-//         </div>
-//       </section>
-
-//       {/* FEATURES */}
-//       <section id="features" className="px-6 py-20">
-//         <h3 className="text-3xl font-bold text-center">
-//           Why ResumeLab?
-//         </h3>
-
-//         <div className="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
-//           <div className="p-6 border rounded-xl shadow-sm">
-//             <h4 className="font-semibold text-lg">
-//               🤖 AI Resume Builder
-//             </h4>
-//             <p className="text-gray-600 mt-2">
-//               Generate professional resumes instantly using AI tailored to your job role.
-//             </p>
-//           </div>
-
-//           <div className="p-6 border rounded-xl shadow-sm">
-//             <h4 className="font-semibold text-lg">
-//               📊 ATS Score Checker
-//             </h4>
-//             <p className="text-gray-600 mt-2">
-//               Optimize your resume to pass Applicant Tracking Systems easily.
-//             </p>
-//           </div>
-
-//           <div className="p-6 border rounded-xl shadow-sm">
-//             <h4 className="font-semibold text-lg">
-//               ✨ One-Click Improvements
-//             </h4>
-//             <p className="text-gray-600 mt-2">
-//               Improve bullet points, summaries, and skills with AI suggestions.
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* TEMPLATES */}
-//       <section id="templates" className="px-6 py-20 bg-gray-50">
-//         <h3 className="text-3xl font-bold text-center">
-//           Professional Templates
-//         </h3>
-
-//         <div className="grid md:grid-cols-3 gap-6 mt-10 max-w-6xl mx-auto">
-//           {[1, 2, 3].map((t) => (
-//             <div
-//               key={t}
-//               className="h-64 bg-white border rounded-xl shadow-sm flex items-center justify-center"
-//             >
-//               Template {t}
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* HOW IT WORKS */}
-//       <section className="px-6 py-20">
-//         <h3 className="text-3xl font-bold text-center">
-//           How It Works
-//         </h3>
-
-//         <div className="grid md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto text-center">
-//           <div>
-//             <div className="text-4xl">1</div>
-//             <p className="mt-2 font-semibold">Create Resume</p>
-//             <p className="text-gray-600">
-//               Fill your details or import LinkedIn.
-//             </p>
-//           </div>
-
-//           <div>
-//             <div className="text-4xl">2</div>
-//             <p className="mt-2 font-semibold">Enhance with AI</p>
-//             <p className="text-gray-600">
-//               Improve content with one click.
-//             </p>
-//           </div>
-
-//           <div>
-//             <div className="text-4xl">3</div>
-//             <p className="mt-2 font-semibold">Download PDF</p>
-//             <p className="text-gray-600">
-//               Export ATS-friendly resume instantly.
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* CTA SECTION */}
-//       <section className="px-6 py-20 bg-blue-600 text-white text-center">
-//         <h3 className="text-3xl font-bold">
-//           Ready to build your resume?
-//         </h3>
-
-//         <p className="mt-4 text-blue-100">
-//           Join thousands of job seekers using ResumeLab.
-//         </p>
-
-//         <Link
-//           to="/login"
-//           className="mt-6 inline-block px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100"
-//         >
-//           Get Started Now
-//         </Link>
-//       </section>
-
-//       {/* FOOTER */}
-//       <footer className="px-6 py-10 border-t text-center text-sm text-gray-500">
-//         © {new Date().getFullYear()} ResumeLab. All rights reserved.
-//       </footer>
-//     </div>
-//   );
-// }
-
-
-import { Link } from "react-router-dom";
-
-export default function HomePage() {
   return (
-    <div className="bg-white text-gray-900">
+    <>
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-blue-600" />
+            <span className="font-bold text-xl">ResumeForge</span>
+          </div>
 
-      {/* NAVBAR */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-          <h1 className="text-xl font-bold text-blue-600">
-            ResumeLab
-          </h1>
-
-          <nav className="flex items-center gap-6 text-sm text-gray-600">
-            <a href="#features" className="hover:text-blue-600">Features</a>
-            <a href="#how" className="hover:text-blue-600">How it works</a>
-            <a href="#demo" className="hover:text-blue-600">AI Demo</a>
-            <a href="#pricing" className="hover:text-blue-600">Pricing</a>
-
-            <Link
-              to="/login"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Get Started
-            </Link>
+          <nav className="hidden md:flex gap-8">
+            <a href="#features">Features</a>
+            <a href="#templates">Templates</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
           </nav>
+
+          <div className="flex gap-4">
+            <button>Sign In</button>
+
+            <button className="bg-blue-600 text-white px-5 py-2 rounded-xl">
+              Get Started
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-24">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+      <main>
+        <section className="relative overflow-hidden pt-10 pb-32">
+          <div className="absolute inset-0 bg-linear-to-br from-blue-100 via-white to-indigo-100" />
 
-          <div className="inline-block px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full mb-6">
-            ✨ AI-Powered Resume Builder
-          </div>
+          <div className="max-w-7xl mx-auto px-6 relative">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm">
+                  AI Powered Resume Builder
+                </span>
 
-          <h1 className="text-5xl font-bold leading-tight">
-            Build Job-Ready Resumes <br />
-            in Minutes with AI
-          </h1>
+                <h1 className="mt-8 text-6xl font-bold leading-tight">
+                  Build a Professional Resume That Gets Interviews
+                </h1>
 
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-            ResumeLab helps you write, improve, and optimize your resume using AI.
-            Get ATS-friendly resumes that actually get interviews.
-          </p>
+                <p className="mt-6 text-xl text-slate-600">
+                  Create ATS-friendly resumes, optimize keywords, and generate
+                  cover letters with AI in minutes.
+                </p>
 
-          <div className="mt-8 flex justify-center gap-4">
-            <Link className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-md">
-              Start Free
-            </Link>
+                <div className="flex gap-4 mt-10">
+                  <button className="bg-blue-600 text-white px-8 py-4 rounded-xl">
+                    Create Resume
+                  </button>
 
-            <a href="#demo" className="px-6 py-3 border rounded-xl hover:bg-gray-50">
-              Try AI Demo
-            </a>
-          </div>
+                  <button className="border px-8 py-4 rounded-xl">
+                    View Templates
+                  </button>
+                </div>
 
-          {/* mini stats */}
-          <div className="mt-12 grid grid-cols-3 gap-6 max-w-2xl mx-auto text-center">
-            <div>
-              <p className="text-2xl font-bold text-blue-600">10k+</p>
-              <p className="text-sm text-gray-500">Resumes Created</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-blue-600">92%</p>
-              <p className="text-sm text-gray-500">ATS Pass Rate</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-blue-600">4.8/5</p>
-              <p className="text-sm text-gray-500">User Rating</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section id="features" className="py-24">
-        <div className="max-w-6xl mx-auto px-6">
-
-          <h2 className="text-3xl font-bold text-center">
-            Everything you need to land interviews
-          </h2>
-
-          <p className="text-center text-gray-600 mt-3">
-            Smart tools to write, improve and optimize your resume.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6 mt-12">
-
-            <div className="p-6 border rounded-xl bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="font-semibold text-lg">
-                🤖 AI Resume Writer
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Generate full professional resumes instantly based on your experience and job role.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="font-semibold text-lg">
-                📊 ATS Optimization
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Improve formatting and keywords to pass ATS filters used by companies.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="font-semibold text-lg">
-                ✍️ Smart AI Suggestions
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Improve bullet points, summaries, and skills with one click.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section id="how" className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-
-          <h2 className="text-3xl font-bold text-center">
-            How ResumeLab works
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-
-            <div className="bg-white p-6 rounded-xl border">
-              <div className="text-blue-600 font-bold text-2xl">1</div>
-              <h3 className="mt-2 font-semibold">Fill your details</h3>
-              <p className="text-gray-600 mt-2">
-                Add your experience, education, and skills in a simple form.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border">
-              <div className="text-blue-600 font-bold text-2xl">2</div>
-              <h3 className="mt-2 font-semibold">Enhance with AI</h3>
-              <p className="text-gray-600 mt-2">
-                Improve your resume content with AI suggestions instantly.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border">
-              <div className="text-blue-600 font-bold text-2xl">3</div>
-              <h3 className="mt-2 font-semibold">Download PDF</h3>
-              <p className="text-gray-600 mt-2">
-                Export ATS-friendly resumes in one click.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* AI DEMO */}
-      <section id="demo" className="py-24">
-        <div className="max-w-4xl mx-auto px-6">
-
-          <h2 className="text-3xl font-bold text-center">
-            See AI in action
-          </h2>
-
-          <div className="mt-10 border rounded-xl p-6 bg-white shadow">
-
-            <div className="text-sm text-gray-500">Input</div>
-            <div className="mt-2 p-3 bg-gray-100 rounded">
-              worked at amazon as frontend dev
-            </div>
-
-            <div className="mt-6 text-sm text-gray-500">AI Output</div>
-            <div className="mt-2 p-3 bg-blue-50 text-blue-700 rounded">
-              Developed scalable frontend applications at Amazon using React, improving UI performance and accessibility across multiple systems.
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* PRICING */}
-      <section id="pricing" className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-
-          <h2 className="text-3xl font-bold">
-            Simple Pricing
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6 mt-12">
-
-            {[
-              {
-                name: "Free",
-                price: "$0",
-                desc: "Basic resume builder"
-              },
-              {
-                name: "Pro",
-                price: "$9",
-                desc: "AI + ATS optimization"
-              },
-              {
-                name: "Premium",
-                price: "$19",
-                desc: "Everything + cover letters"
-              }
-            ].map((p, i) => (
-              <div key={i} className="p-6 bg-white border rounded-xl shadow-sm">
-
-                <h3 className="font-semibold text-lg">{p.name}</h3>
-                <p className="text-3xl font-bold mt-2 text-blue-600">{p.price}</p>
-                <p className="text-gray-600 mt-2">{p.desc}</p>
-
-                <button className="mt-6 w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                  Choose Plan
-                </button>
-
+                <div className="flex gap-8 mt-10 text-sm text-slate-500">
+                  <span>✓ ATS Optimized</span>
+                  <span>✓ AI Generated</span>
+                  <span>✓ PDF Export</span>
+                </div>
               </div>
-            ))}
 
+              <div className="">
+                <div className="relative">
+                  <div className="absolute -bottom-6 right-36 bg-white rounded-xl shadow-2xl p-4">
+                    ATS Score 94%
+                  </div>
+
+                  <img
+                    // srcSet="https://kommodo.ai/i/k4PVt6J238wu35i9ljP6"
+                    src={`${heroImg}`}
+                    alt="Resume"
+                    className="rounded-3xl "
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FOOTER */}
-      <footer className="py-10 text-center text-sm text-gray-500 border-t">
-        © {new Date().getFullYear()} ResumeLab. Built for job seekers.
-      </footer>
+        <section id="features" className="py-32">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center">
+              <h2 className="text-5xl font-bold">Everything You Need</h2>
+
+              <p className="mt-4 text-slate-600">
+                Designed to help you land more interviews.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
+              {features.map((feature) => (
+                <div className="p-8 rounded-3xl bg-slate-50 hover:bg-white hover:shadow-xl transition">
+                  <div className="w-14 h-14 bg-blue-100 rounded-2xl" />
+
+                  <h3 className="mt-6 font-semibold text-xl">
+                    {feature.title}
+                  </h3>
+
+                  <p className="mt-3 text-slate-600">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="py-32 bg-slate-50">
+          <div className="max-w-3xl mx-auto px-6">
+            <h2 className="text-5xl font-bold text-center">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="mt-16">
+              {faqs.map((item) => (
+                <FAQItem item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        
+      </main>
+
+      <footer className="bg-slate-950 text-white py-20">
+
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="grid md:grid-cols-4 gap-10">
+
+      <div>
+        <h3 className="font-bold text-xl">
+          ResumeForge
+        </h3>
+
+        <p className="mt-4 text-slate-400">
+          AI-powered resumes for modern careers.
+        </p>
+      </div>
+
+      <div>
+        <h4 className="font-semibold mb-4">
+          Product
+        </h4>
+
+        <ul className="space-y-3 text-slate-400">
+          <li>Resume Builder</li>
+          <li>Templates</li>
+          <li>Cover Letters</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-semibold mb-4">
+          Resources
+        </h4>
+
+        <ul className="space-y-3 text-slate-400">
+          <li>Blog</li>
+          <li>Career Advice</li>
+          <li>FAQ</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-semibold mb-4">
+          Company
+        </h4>
+
+        <ul className="space-y-3 text-slate-400">
+          <li>About</li>
+          <li>Privacy</li>
+          <li>Contact</li>
+        </ul>
+      </div>
 
     </div>
+
+  </div>
+
+</footer>
+    </>
   );
-}
+};
+
+export default HomePage;
