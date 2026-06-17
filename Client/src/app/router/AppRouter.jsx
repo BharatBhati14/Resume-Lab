@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // import { ProtectedRoute } from "./ProtectedRoute";
 
 import HomePage from "../../pages/HomePage";
@@ -9,7 +9,7 @@ import PersonalInfoForm from "../../features/resumes/components/PersonalInfoForm
 import ResumePreview from "../../features/resumes/components/ResumePreview";
 
 import useAuthStore from "../store/authStore";
-import { Navigate } from "react-router-dom";
+import RegisterPage from "../../features/auth/pages/RegisterPage";
 
 function AppRouter() {
 
@@ -24,7 +24,6 @@ function AppRouter() {
   }
 
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -38,12 +37,12 @@ function AppRouter() {
           }
         />
 
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/preview" element={<ResumePreview />} />
         {/* GET resume */}
         <Route path="/resume" element={<ResumeBuilderPage />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 
