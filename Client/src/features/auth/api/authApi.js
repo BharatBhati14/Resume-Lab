@@ -1,13 +1,21 @@
-// import axios from "axios";
+import axios from "axios";
 
-export const login = async (email, password) => {
-  const res = await axios.post(
-    "http://localhost:5000/api/login",
-    {
-      email,
-      password
-    }
-  );
+export const apiClient = axios.create({
+  baseURL: "/",
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  return res.data;
+// Register User
+export const registerUser = async (data) => {
+  const response = await apiClient.post("/api/auth/register", data);
+  return response.data;
+};
+
+export const loginUser = async (data) => {
+  const response = await apiClient.post("/api/auth/login", data);
+console.log(response)
+  return response.data;
 };

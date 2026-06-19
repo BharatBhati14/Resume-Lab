@@ -1,22 +1,22 @@
 import { create } from "zustand";
 
 const useAuthStore = create((set) => ({
-  user: null,
-  token: null,
+  // user: null,
+  isLoggedIn: false,
 
-  login: (user, token) =>
+  login: () =>
     set({
-      user,
-      token,
-      isLoggedIn: true
+      // user,
+      isLoggedIn: true,
     }),
 
   logout: () =>
     set({
-      user: null,
-      token: null,
-      isLoggedIn: false
-    })
+      // user: null,
+      isLoggedIn: false,
+    }),
+
+  checkAuth: (isValid) => set({ isLoggedIn: isValid }),
 }));
 
 export default useAuthStore;

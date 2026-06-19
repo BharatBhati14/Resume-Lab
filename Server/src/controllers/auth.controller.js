@@ -36,7 +36,7 @@ export const registerUser = async (req, res) => {
     const user = await userModel.create({
       username,
       email,
-      passwordHash,
+      password: passwordHash,
     });
 
     // 5. Set auth cookie
@@ -78,12 +78,12 @@ export const loginUser = async (req, res) => {
       });
     }
 
-    const user = await userModel.findOne({ email }).select("+passwordHash");
+    const user = await userModel.findOne({ email }).select("+password");
 
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -115,7 +115,7 @@ export const userdetails = async (req, res) => {
         message: "Invalid email or password",
       });
     }
-    console.log(userPassed);
+    // console.log(userPassed);
 
     const user = await userModel.findOne({ _id: userPassed.userId });
 

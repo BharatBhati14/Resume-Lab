@@ -1,48 +1,58 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-// import { ProtectedRoute } from "./ProtectedRoute";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import MainLayout from "../../shared/layouts/MainLayout";
+import AuthLayout from "../../features/auth/Layout/AuthLayout";
 
 import HomePage from "../../pages/HomePage";
-import LoginPage from "../../features/auth/pages/LoginPage";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import ResumeBuilderPage from "../../features/resumes/pages/ResumeBuilderPage";
 import PersonalInfoForm from "../../features/resumes/components/PersonalInfoForm";
 import ResumePreview from "../../features/resumes/components/ResumePreview";
 
-import useAuthStore from "../store/authStore";
+import LoginPage from "../../features/auth/pages/LoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
 
-function AppRouter() {
+import useAuthStore from "../store/authStore";
 
-  function ProtectedRoute({ children }) {
-    const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+function ProtectedRoute({ children }) {
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
-    if (!isLoggedIn) {
-      return <Navigate to="/login" />;
-    }
-
-    return children;
+  if (!isLoggedIn) {
+    console.log("here")
+    return <Navigate to="/login" />;
   }
 
+  return children;
+}
+
+function AppRouter() {
   return (
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* AuthLayout */}
+        <Route element={<AuthLayout />}>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
 
-        {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
+        {/* MainLayout */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/resume" element={<ResumeBuilderPage />} />
+          <Route path="/preview" element={<ResumePreview />} />
+        </Route>
 
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/preview" element={<ResumePreview />} />
         {/* GET resume */}
-        <Route path="/resume" element={<ResumeBuilderPage />} />
       </Routes>
+    </BrowserRouter>
   );
 }
 
