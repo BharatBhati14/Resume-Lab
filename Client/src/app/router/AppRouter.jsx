@@ -13,13 +13,15 @@ import LoginPage from "../../features/auth/pages/LoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
 
 import useAuthStore from "../store/authStore";
+import { currentUser } from "../../features/auth/api/authApi";
+import { useQuery } from "@tanstack/react-query";
 
 function ProtectedRoute({ children }) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  
 
   if (!isLoggedIn) {
-    console.log("here")
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;

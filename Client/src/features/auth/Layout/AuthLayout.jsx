@@ -7,7 +7,7 @@ function AuthLayout() {
 
   return (
     <>
-      <header className="top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+      {/* <header className="top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           <span className="font-bold text-2xl sm:text-3xl">
             ResumeLab
@@ -29,7 +29,7 @@ function AuthLayout() {
             </Link>
           )}
         </div>
-      </header>
+      </header> */}
 
       <Outlet />
     </>

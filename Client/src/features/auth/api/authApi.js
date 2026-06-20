@@ -14,8 +14,15 @@ export const registerUser = async (data) => {
   return response.data;
 };
 
+// Login
 export const loginUser = async (data) => {
   const response = await apiClient.post("/api/auth/login", data);
-console.log(response)
+  // console.log(response);
+  return response.data;
+};
+
+// get Current user details
+export const currentUser = async (data) => {
+  const response = await apiClient.get("/api/auth/me");
   return response.data;
 };

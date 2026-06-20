@@ -39,8 +39,8 @@ function LoginPage() {
   });
 
   return (
-    <div className="min-h-[calc(100vh-81px)] bg-slate-100 flex items-center justify-center px-4 py-8 ">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4 py-8 ">
+      <div className="w-full max-w-104 bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
         <h1 className="text-2xl font-bold text-center mb-2">
           Welcome Back
         </h1>
@@ -121,7 +121,7 @@ function LoginPage() {
             disabled={isSubmitting}
             className="w-full rounded-lg bg-blue-700 py-2.5 font-medium text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-blue-400 cursor-pointer"
           >
-            {isSubmitting ? "Signing In..." : "Sign In"}
+            {isSubmitting ? "Signing In..." : "Log In"}
           </button>
 
           {/* Divider */}

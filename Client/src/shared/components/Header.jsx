@@ -6,6 +6,8 @@ function Header() {
 
   const location = useLocation();
 
+  const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -19,17 +21,46 @@ function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8">
-          <Link to="/login" className="hover:text-blue-900 cursor-pointer">AI Builder</Link>
-          <a href="#features" className="hover:text-blue-900 cursor-pointer">Features</a>
-          <a href="#testimonial" className="hover:text-blue-900 cursor-pointer">Reviews</a>
-          <a href="#faq" className="hover:text-blue-900 cursor-pointer">FAQ</a>
+          <Link to="/dashboard" className="hover:text-blue-900 cursor-pointer">
+            Dashboard
+          </Link>
+          <Link
+            to="/ai/resume/generate"
+            className="hover:text-blue-900 cursor-pointer"
+          >
+            Build Resume
+          </Link>
+          <Link to="/preview" className="hover:text-blue-900 cursor-pointer">
+            Preview
+          </Link>
+          <Link to="/profile" className="hover:text-blue-900 cursor-pointer">
+            Profile
+          </Link>
         </nav>
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-4">
-            <Link to="/login" className="flex items-center px-3 border-2 rounded-lg border-blue-900 hover:text-white hover:bg-blue-700 transition duration-300 box-border">Log In</Link>
+          {isHomePage ? (
+            <>
+              <Link
+                to="/login"
+                className="flex items-center px-3 border-2 rounded-lg border-blue-900 hover:text-white hover:bg-blue-700 transition duration-300 box-border"
+              >
+                Log In
+              </Link>
 
-            <Link to="/register" className="bg-blue-700 text-white px-5 py-2 rounded-lg">Register</Link>
+              <Link
+                to="/register"
+                className="bg-blue-700 text-white px-5 py-2 rounded-lg"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <button className="text-red-600 py-2 rounded-xl">
+              <Link to="/logout">Logout</Link>
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -72,17 +103,32 @@ function Header() {
       {isOpen && (
         <div className="absolute top-full left-0 w-full backdrop-blur-xl bg-white shadow-lg border-t border-slate-200 md:hidden">
           <nav className="flex flex-col gap-4 p-4">
-            <Link to="#features">Features</Link>
-            <Link to="#templates">Templates</Link>
-            <Link to="#reviews">Reviews</Link>
-            <Link to="#faq">FAQ</Link>
+            <Link
+              to="/dashboard"
+              // className="hover:text-blue-900 cursor-pointer"
+            >
+              Dashboard
+            </Link>
+            <Link to="/ai/resume/generate">Build Resume</Link>
+            <Link to="/preview"> Preview </Link>
+            <Link to="/profile">Profile</Link>
 
             <hr />
-              <Link to="/login" className="text-left">Log In </Link>
+            {isHomePage ? (
+              <>
+                <Link to="/login" className="text-left">
+                  Log In
+                </Link>
 
-            <button className="bg-blue-600 text-white py-2 rounded-xl">
-              <Link to="/register">Get Started</Link>
-            </button>
+                <button className="bg-blue-600 text-white py-2 rounded-xl">
+                  <Link to="/register">Get Started</Link>
+                </button>
+              </>
+            ) : (
+              <button className="text-red-600 py-2 text-left rounded-xl">
+                <Link to="/logout">Logout</Link>
+              </button>
+            )}
           </nav>
         </div>
       )}

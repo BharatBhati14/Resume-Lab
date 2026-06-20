@@ -34,8 +34,8 @@ function RegisterPage() {
   });
 
   return (
-    <div className="min-h-[90vh] bg-slate-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
+      <div className="w-full max-w-104 bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
         <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
 
         <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
@@ -158,6 +158,7 @@ function RegisterPage() {
             >
               {isSubmitting ? "Creating..." : "Create Account"}
             </button>
+            {registerMutation.isError && <p className="text-md text-red-500">{registerMutation.error?.status === 409 && `Unable to create an account.Try again later or use another email`}</p>}
 
             <p className="text-center text-sm text-gray-600">
               Already have an account?{" "}
