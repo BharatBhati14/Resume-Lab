@@ -1,4 +1,6 @@
-import useResumeStore from "../store/resumeStore";
+// import useResumeStore from "../store/resumeStore";
+
+import { useResumeStore } from "../store/resumeStore";
 
 function PersonalInfoForm() {
   const { personalInfo, updatePersonalInfo } =

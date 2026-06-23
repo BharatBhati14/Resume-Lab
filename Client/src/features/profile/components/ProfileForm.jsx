@@ -4,16 +4,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoSchema } from "../schemas/personalInfo.schema";
 import { getProfile, updateProfile } from "../hooks/useProfile";
+import { useResumeStore } from "../../resumes/store/resumeStore";
 
 const inputClass =
   "w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200";
 
 export default function ProfileForm() {
+  // let profileData = {};
+  const setPersonalInfo = useResumeStore((state) => state.setPersonalInfo);
+
   const location = useLocation();
   const isResumePage = location.pathname === "/resume";
   const navigate = useNavigate();
 
-  const { data: profile, isLoading } = getProfile();  
+  const { data: profile, isLoading } = getProfile();
   const updateProfileMutation = updateProfile();
 
   const {
@@ -42,11 +46,13 @@ export default function ProfileForm() {
     console.log(data);
     const res = updateProfileMutation.mutate(data);
     // profile = {...res}
+    setPersonalInfo(data);
+    // profileData = data;
   };
 
   useEffect(() => {
     if (!profile) return;
-    console.log("it runs")
+    console.log("it runs");
     console.log("resetting form", profile);
 
     reset({
@@ -259,14 +265,16 @@ export default function ProfileForm() {
               Save Changes
             </button>
 
-            {isResumePage && <button
-              type="button"
-              disabled={!isValid}
-              className="rounded-lg bg-white px-6 py-2 text-md font-medium border-2 text-blue-900 border-blue-700 transition hover:bg-blue-700 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-0 disabled:text-white"
-              // onClick={()=>navigate('/')}
-            >
-              Next
-            </button>}
+            {isResumePage && (
+              <button
+                type="button"
+                disabled={!isValid}
+                className="rounded-lg bg-white px-6 py-2 text-md font-medium border-2 text-blue-900 border-blue-700 transition hover:bg-blue-700 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-0 disabled:text-white"
+                // onClick={()=>setPersonalInfo(profileData)}
+              >
+                Next
+              </button>
+            )}
           </div>
         </form>
       </div>
