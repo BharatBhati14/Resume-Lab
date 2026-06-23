@@ -15,6 +15,7 @@ import RegisterPage from "../../features/auth/pages/RegisterPage";
 import useAuthStore from "../store/authStore";
 import { currentUser } from "../../features/auth/api/authApi";
 import { useQuery } from "@tanstack/react-query";
+import ProfileForm from "../../features/profile/components/ProfileForm";
 
 function ProtectedRoute({ children }) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -48,7 +49,24 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
-          <Route path="/resume" element={<ResumeBuilderPage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resume"
+            element={
+              <ProtectedRoute>
+                <ResumeBuilderPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* <Route path="/resume" element={<ResumeBuilderPage />} /> */}
           <Route path="/preview" element={<ResumePreview />} />
         </Route>
 

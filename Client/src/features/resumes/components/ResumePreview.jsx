@@ -1,17 +1,19 @@
-import useResumeStore from "../store/resumeStore";
-
-function ResumePreview() {
-  const { personalInfo } = useResumeStore();
-
+export default function ResumePreview({ resumeData }) {
   return (
-    <div className="mx-auto max-w-200 bg-white p-8 shadow">
+    <div className="bg-white p-6 rounded-xl shadow">
       <h1 className="text-3xl font-bold">
-        {personalInfo.fullName}
+        {resumeData?.personalInfo?.fullName}
       </h1>
 
-      <p>{personalInfo.email}</p>
+      <p>{resumeData?.personalInfo?.email}</p>
+
+      <p>{resumeData?.personalInfo?.phone}</p>
+
+      <hr className="my-4" />
+
+      <h2 className="font-bold text-xl mb-2">Summary</h2>
+
+      <p>{resumeData?.summary}</p>
     </div>
   );
 }
-
-export default ResumePreview;

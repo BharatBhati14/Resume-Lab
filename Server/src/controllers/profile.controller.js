@@ -35,7 +35,7 @@ export const getProfile = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    const profile = await profileModel.findOne({ userId });
+    const profile = await profileModel.findOne({ userId }).select('-_id -userId');
 
     if (!profile) {
       return res.status(404).json({

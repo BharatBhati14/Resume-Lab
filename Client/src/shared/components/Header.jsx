@@ -25,7 +25,7 @@ function Header() {
             Dashboard
           </Link>
           <Link
-            to="/ai/resume/generate"
+            to="/resume"
             className="hover:text-blue-900 cursor-pointer"
           >
             Build Resume
@@ -109,7 +109,7 @@ function Header() {
             >
               Dashboard
             </Link>
-            <Link to="/ai/resume/generate">Build Resume</Link>
+            <Link to="/resume">Build Resume</Link>
             <Link to="/preview"> Preview </Link>
             <Link to="/profile">Profile</Link>
 

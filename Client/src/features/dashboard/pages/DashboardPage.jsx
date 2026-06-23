@@ -9,6 +9,7 @@ const DashboardPage = () => {
   const { isLoading, error } = useQuery({
     queryKey: ["auth"],
     queryFn: currentUser,
+    staleTime: 1000 * 60 * 60,
 
     onSuccess: (data) => {
       login(data.success);

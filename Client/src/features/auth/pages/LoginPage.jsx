@@ -17,7 +17,7 @@ function LoginPage() {
     onSuccess: (data) => {
       login()
       navigate("/dashboard");
-      console.log(useAuthStore.getState().isLoggedIn)
+      // console.log(useAuthStore.getState().isLoggedIn)
     },
   });
   const onSubmit = async (data) => {

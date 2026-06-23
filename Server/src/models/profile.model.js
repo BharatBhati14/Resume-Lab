@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const personalInfoSchema = new mongoose.Schema(
   {
@@ -133,44 +133,54 @@ const profileSchema = new mongoose.Schema(
       index: true,
     },
 
-    personalInfo: {
-      type: personalInfoSchema,
-      default: () => ({}),
-    },
+    fullName: { type: String, trim: true },
+    email: { type: String, trim: true, lowercase: true },
+    phone: { type: String, trim: true },
+    location: { type: String, trim: true },
+    website: { type: String, trim: true },
+    linkedin: { type: String, trim: true },
+    github: { type: String, trim: true },
+    portfolio: { type: String, trim: true },
+    profileImage: { type: String, trim: true }
 
-    experience: {
-      type: [experienceSchema],
-      default: [],
-    },
+    // personalInfo: {
+    //   type: personalInfoSchema,
+    //   default: () => ({}),
+    // },
 
-    projects: {
-      type: [projectSchema],
-      default: [],
-    },
+    // experience: {
+    //   type: [experienceSchema],
+    //   default: [],
+    // },
 
-    education: {
-      type: [educationSchema],
-      default: [],
-    },
+    // projects: {
+    //   type: [projectSchema],
+    //   default: [],
+    // },
 
-    skills: {
-      type: skillsSchema,
-      default: () => ({}),
-    },
+    // education: {
+    //   type: [educationSchema],
+    //   default: [],
+    // },
 
-    certifications: {
-      type: [certificationSchema],
-      default: [],
-    },
+    // skills: {
+    //   type: skillsSchema,
+    //   default: () => ({}),
+    // },
 
-    languages: {
-      type: [languageSchema],
-      default: [],
-    },
-    lastResumeGeneratedAt: {
-      type: Date,
-      default: null,
-    },
+    // certifications: {
+    //   type: [certificationSchema],
+    //   default: [],
+    // },
+
+    // languages: {
+    //   type: [languageSchema],
+    //   default: [],
+    // },
+    // lastResumeGeneratedAt: {
+    //   type: Date,
+    //   default: null,
+    // },
   },
   {
     timestamps: true,
