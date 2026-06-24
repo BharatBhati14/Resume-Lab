@@ -1,9 +1,10 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { experienceSchema } from "../schema/resume.schema";
+import { experienceSchema } from "../../schema/resume.schema";
 import { ExperienceCard } from "./ExperienceCard";
-import { useResumeStore } from "../store/resumeStore";
+import { useResumeStore } from "../../store/resumeStore";
+import SaveButton from "../../../../shared/components/SaveButton";
 
 const inputClass = "w-full rounded-lg border border-gray-300 px-4 py-3";
 
@@ -92,8 +93,13 @@ export default function ExperienceSection() {
         );
       })}
 
+      {fields.length >= 5 && (
+        <p className="text-sm text-gray-500">Maximum 5 Experiences allowed.</p>
+      )}
+
       <button
         type="button"
+        disabled={fields.length >= 5}
         onClick={() =>
           append({
             company: "",
@@ -106,17 +112,23 @@ export default function ExperienceSection() {
             technologies: "",
           })
         }
-        className="rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 cursor-pointer"
+        className={`rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
+    ${
+      fields.length >= 5
+        ? "cursor-not-allowed border-gray-300 text-gray-400 hover:bg-white"
+        : "cursor-pointer"
+    }`}
       >
         Add More Experience
       </button>
 
-      <button
+      {/* <button
         type="submit"
         className="rounded-lg bg-blue-600 px-5 py-2.5 ml-6 font-medium text-white hover:bg-blue-700 cursor-pointer"
       >
         Save
-      </button>
+      </button> */}
+      <SaveButton />
     </form>
   );
 }

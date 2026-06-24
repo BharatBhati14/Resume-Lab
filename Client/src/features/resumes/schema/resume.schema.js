@@ -20,6 +20,22 @@ import { personalInfoSchema } from "../../profile/schemas/personalInfo.schema";
 //   skills: z.object({}).optional(),
 // });
 
+// ********** Title & Summary Schema **********
+export const titleSummarySchema = z.object({
+  title: z
+    .string()
+    .trim()
+    // .min(2, "Title is required")
+    .max(100, "Title cannot exceed 100 characters"),
+
+  summary: z
+    .string()
+    .trim()
+    // .min(20, "Summary should be at least 20 characters")
+    .max(300, "Summary cannot exceed 1000 characters"),
+});
+
+// ********** Experience Schema **********
 export const experienceItemSchema = z
   .object({
     company: z
@@ -82,5 +98,50 @@ export const experienceItemSchema = z
   });
 
 export const experienceSchema = z.object({
-  experience: z.array(experienceItemSchema),
+  experience: z
+    .array(experienceItemSchema)
+    .min(1, "Add at least one experience")
+    .max(5, "Maximum 5 experiences allowed"),
+});
+
+// ********** Project Schema **********
+export const projectItemSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(1, "Project title is required")
+    .max(100, "Project title is too long"),
+
+  description: z
+    .string()
+    .trim()
+    .min(20, "Description must be 20 characters long")
+    .max(300, "Project description is too long"),
+
+  technologies: z
+    .string()
+    .trim()
+    .min(1, "Add at least one technology")
+    .max(150, "Technologies list is too long"),
+
+  liveUrl: z
+    .string()
+    .trim()
+    .url("Enter a valid Live URL")
+    .optional()
+    .or(z.literal("")),
+
+  githubUrl: z
+    .string()
+    .trim()
+    .url("Enter a valid GitHub URL")
+    .optional()
+    .or(z.literal("")),
+});
+
+export const projectsSchema = z.object({
+  projects: z
+    .array(projectItemSchema)
+    .min(1, "Add at least one project")
+    .max(3, "Project limit is 3"),
 });

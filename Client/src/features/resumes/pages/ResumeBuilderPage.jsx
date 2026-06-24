@@ -31,47 +31,50 @@
 
 import { useForm, FormProvider } from "react-hook-form";
 import ProfileForm from "../../profile/components/ProfileForm";
-import ExperienceSection from "../components/ExperienceSection";
+import ExperienceSection from "../components/experience/ExperienceSection";
 // import { resumeSchema } from "../schema/resume.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import TitleSummarySection from "../components/TitleSummarySection";
+import ProjectSection from "../components/projects/ProjectSection";
 
 export default function ResumeBuilder() {
-  const methods = useForm({
-    // resolver: zodResolver(resumeSchema),
+  // const methods = useForm({
+  //   // resolver: zodResolver(resumeSchema),
 
-    defaultValues: {
-      personalInfo: {
-        fullName: "",
-        email: "",
-        phone: "",
-        location: "",
-        website: "",
-        linkedin: "",
-        github: "",
-        portfolio: "",
-        profileImage: "",
-      },
-      experience: [],
-      projects: [],
-      education: [],
-      skills: {},
-    },
-  });
+  //   defaultValues: {
+  //     personalInfo: {
+  //       fullName: "",
+  //       email: "",
+  //       phone: "",
+  //       location: "",
+  //       website: "",
+  //       linkedin: "",
+  //       github: "",
+  //       portfolio: "",
+  //       profileImage: "",
+  //     },
+  //     experience: [],
+  //     projects: [],
+  //     education: [],
+  //     skills: {},
+  //   },
+  // });
 
-   const onSubmit = (data) => {
+  const onSubmit = (data) => {
     console.log("Resume Data", data);
   };
 
   return (
-    <FormProvider {...methods} onSubmit={methods.handleSubmit(onSubmit)}>
-      {/* <form onSubmit={methods.handleSubmit(onSubmit)}> */}
+    <>
+      {/* <FormProvider {...methods} onSubmit={methods.handleSubmit(onSubmit)}> */}
+        {/* <form onSubmit={methods.handleSubmit(onSubmit)}> */}
         <ProfileForm />
+        <TitleSummarySection />
         <ExperienceSection />
-
-        <button type="submit">
-          Save Resume
-        </button>
-      {/* </form> */}
-    </FormProvider>
+        <ProjectSection />
+        <button type="submit">Save Resume</button>
+        {/* </form> */}
+      {/* </FormProvider> */}
+    </>
   );
 }

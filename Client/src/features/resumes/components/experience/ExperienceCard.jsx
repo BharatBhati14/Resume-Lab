@@ -32,7 +32,7 @@ export function ExperienceCard({
         <button
           type="button"
           onClick={() => remove(index)}
-          className="rounded-lg px-3 py-2 text-[1rem] font-medium text-red-600 hover:bg-red-50"
+          className="rounded-lg px-3 py-2 text-[1rem] font-medium text-red-600 hover:bg-red-50 cursor-pointer"
         >
           Remove
         </button>
