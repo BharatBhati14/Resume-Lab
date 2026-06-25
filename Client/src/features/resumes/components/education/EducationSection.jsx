@@ -1,0 +1,107 @@
+import { useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { educationSchema } from "../../schema/resume.schema";
+import { EducationCard } from "./EducationCard";
+import { useResumeStore } from "../../store/resumeStore";
+import SaveButton from "../../../../shared/components/SaveButton";
+
+export default function EducationSection() {
+  const updateSection = useResumeStore((state) => state.updateSection);
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(educationSchema),
+
+    defaultValues: {
+      education: [
+        {
+          institution: "",
+          degree: "",
+          fieldOfStudy: "",
+          location: "",
+          startDate: "",
+          endDate: "",
+          isCurrent: false,
+          grade: "",
+          description: "",
+        },
+      ],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "education",
+  });
+
+  const onSubmit = (data) => {
+    updateSection("education", data.education);
+
+    console.log(data.education);
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-8 mx-auto max-w-7xl"
+    >
+      <div className="pl-6">
+        <h1 className="text-blue-950 font-bold text-2xl md:text-3xl">
+          Education Section
+        </h1>
+        <p className="mt-1 text-sm text-gray-500">
+          Add your education details.
+        </p>
+      </div>
+
+      {fields.map((field, index) => (
+        <EducationCard
+          key={field.id}
+          index={index}
+          register={register}
+          errors={errors}
+          remove={remove}
+        />
+      ))}
+
+      {fields.length >= 5 && (
+        <p className=" text-gray-700 pl-4">
+          Maximum 5 Education entries allowed.
+        </p>
+      )}
+
+      <button
+        type="button"
+        disabled={fields.length >= 5}
+        onClick={() =>
+          append({
+            institution: "",
+            degree: "",
+            fieldOfStudy: "",
+            location: "",
+            startDate: "",
+            endDate: "",
+            isCurrent: false,
+            grade: "",
+            description: "",
+          })
+        }
+        className={`rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
+    ${
+      fields.length >= 5
+        ? "cursor-not-allowed border-gray-300 text-gray-400 hover:bg-white"
+        : "cursor-pointer"
+    }`}
+      >
+        Add Education
+      </button>
+
+      <SaveButton />
+    </form>
+  );
+}

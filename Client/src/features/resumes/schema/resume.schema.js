@@ -145,3 +145,82 @@ export const projectsSchema = z.object({
     .min(1, "Add at least one project")
     .max(3, "Project limit is 3"),
 });
+
+
+// ********** Education Schema **********
+
+export const educationItemSchema = z
+  .object({
+    institution: z
+      .string()
+      .trim()
+      .min(1, "Institution is required")
+      .max(150, "Institution name is too long"),
+
+    degree: z
+      .string()
+      .trim()
+      .min(1, "Degree is required")
+      .max(100, "Degree is too long"),
+
+    fieldOfStudy: z
+      .string()
+      .trim()
+      .min(1, "Field of study is required")
+      .max(100, "Field of study is too long"),
+
+    location: z
+      .string()
+      .trim()
+      .max(100, "Location is too long")
+      .optional()
+      .or(z.literal("")),
+
+    startDate: z.string().min(1, "Start date is required"),
+
+    isCurrent: z.boolean(),
+
+    endDate: z.string().optional(),
+
+    grade: z
+      .string()
+      .trim()
+      .max(50, "Grade is too long")
+      .optional()
+      .or(z.literal("")),
+
+    description: z
+      .string()
+      .trim()
+      .max(200, "Description is too long")
+      .optional()
+      .or(z.literal("")),
+  })
+  .superRefine((data, ctx) => {
+    if (!data.isCurrent && !data.endDate) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["endDate"],
+        message: "End date is required",
+      });
+    }
+
+    if (
+      data.startDate &&
+      data.endDate &&
+      new Date(data.endDate) < new Date(data.startDate)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["endDate"],
+        message: "End date must be after start date",
+      });
+    }
+  });
+
+export const educationSchema = z.object({
+  education: z
+    .array(educationItemSchema)
+    // .min(1, "Add at least one education")
+    .max(3, "Maximum 5 education entries allowed"),
+});

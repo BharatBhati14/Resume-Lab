@@ -3,6 +3,7 @@ import { useResumeStore } from "../store/resumeStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { titleSummarySchema } from "../schema/resume.schema";
 import SaveButton from "../../../shared/components/SaveButton";
+import Optional from "../../../shared/components/Optional";
 
 export default function TitleSummarySection() {
   const updateSection = useResumeStore((state) => state.updateSection);
@@ -42,9 +43,7 @@ export default function TitleSummarySection() {
       <div>
         <label className="block mb-2 font-medium">
           Resume Title{" "}
-          <span className="text-[14px] font-normal text-gray-500 pl-1 italic">
-            (optional)
-          </span>
+          <Optional />
         </label>
 
         <input

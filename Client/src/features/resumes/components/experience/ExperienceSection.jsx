@@ -9,7 +9,7 @@ import SaveButton from "../../../../shared/components/SaveButton";
 const inputClass = "w-full rounded-lg border border-gray-300 px-4 py-3";
 
 export default function ExperienceSection() {
-  const setExperience = useResumeStore((state) => state.setExperience);
+  // const setExperience = useResumeStore((state) => state.setExperience);
   const updateSection = useResumeStore((state) => state.updateSection);
 
   const {
