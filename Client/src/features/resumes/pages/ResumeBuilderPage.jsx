@@ -38,6 +38,8 @@ import TitleSummarySection from "../components/TitleSummarySection";
 import ProjectSection from "../components/projects/ProjectSection";
 import EducationSection from "../components/education/EducationSection";
 import SkillsSection from "../components/SkillsSection";
+import CertificationSection from "../components/certification/CertificationSection";
+import LanguageSection from "../components/languages/LanguageSection";
 
 export default function ResumeBuilder() {
   // const methods = useForm({
@@ -76,6 +78,8 @@ export default function ResumeBuilder() {
         <ProjectSection />
         <SkillsSection />
         <EducationSection />
+        <CertificationSection />
+        <LanguageSection />
         <button type="submit">Save Resume</button>
         {/* </form> */}
       {/* </FormProvider> */}

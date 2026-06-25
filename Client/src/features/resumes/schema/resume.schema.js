@@ -146,7 +146,6 @@ export const projectsSchema = z.object({
     .max(3, "Project limit is 3"),
 });
 
-
 // ********** Education Schema **********
 
 export const educationItemSchema = z
@@ -225,12 +224,66 @@ export const educationSchema = z.object({
     .max(3, "Maximum 5 education entries allowed"),
 });
 
-
-// ********** Skills Schema **********
 export const skillsSchema = z.object({
-  technical: z.string().trim().min(1, "At least one technical skill is required").max(300, "limit reached."),
+  technical: z
+    .string()
+    .trim()
+    .min(1, "At least one technical skill is required")
+    .max(300, "limit reached."),
 
   soft: z.string().trim().max(300, "limit reached.").optional(),
 
   tools: z.string().trim().max(300, "limit reached.").optional(),
+});
+
+// ********** Certifications Schema **********
+export const certificationItemSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Certification name is required")
+    .max(150, "Certification name is too long"),
+
+  issuer: z
+    .string()
+    .trim()
+    .min(1, "Issuer is required")
+    .max(100, "Issuer name is too long"),
+
+  issueDate: z.string().min(1, "Issue date is required"),
+
+  url: z.string().trim().url("Enter a valid URL").optional().or(z.literal("")),
+});
+
+export const certificationsSchema = z.object({
+  certifications: z
+    .array(certificationItemSchema)
+    // .min(1, "Add at least one certification")
+    .max(5, "Maximum 5 certifications allowed"),
+});
+
+
+// ********** Language Schema **********
+export const languageItemSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Language is required")
+    .max(50, "Language name is too long"),
+
+  proficiency: z.enum(
+    ["basic", "intermediate", "fluent", "native"],
+    {
+      errorMap: () => ({
+        message: "Select a proficiency level",
+      }),
+    }
+  ),
+});
+
+export const languagesSchema = z.object({
+  languages: z
+    .array(languageItemSchema)
+    // .min(1, "Add at least one language")
+    .max(5, "Maximum 5 languages allowed"),
 });
