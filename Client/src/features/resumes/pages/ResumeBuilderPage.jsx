@@ -37,6 +37,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TitleSummarySection from "../components/TitleSummarySection";
 import ProjectSection from "../components/projects/ProjectSection";
 import EducationSection from "../components/education/EducationSection";
+import SkillsSection from "../components/SkillsSection";
 
 export default function ResumeBuilder() {
   // const methods = useForm({
@@ -73,6 +74,7 @@ export default function ResumeBuilder() {
         <TitleSummarySection />
         <ExperienceSection />
         <ProjectSection />
+        <SkillsSection />
         <EducationSection />
         <button type="submit">Save Resume</button>
         {/* </form> */}

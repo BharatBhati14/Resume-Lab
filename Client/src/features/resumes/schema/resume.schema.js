@@ -224,3 +224,13 @@ export const educationSchema = z.object({
     // .min(1, "Add at least one education")
     .max(3, "Maximum 5 education entries allowed"),
 });
+
+
+// ********** Skills Schema **********
+export const skillsSchema = z.object({
+  technical: z.string().trim().min(1, "At least one technical skill is required").max(300, "limit reached."),
+
+  soft: z.string().trim().max(300, "limit reached.").optional(),
+
+  tools: z.string().trim().max(300, "limit reached.").optional(),
+});
