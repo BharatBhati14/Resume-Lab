@@ -5,11 +5,14 @@ import { experienceSchema } from "../../schema/resume.schema";
 import { ExperienceCard } from "./ExperienceCard";
 import { useResumeStore } from "../../store/resumeStore";
 import SaveButton from "../../../../shared/components/SaveButton";
+import PreviousButton from "../../../../shared/components/PreviousButton";
+import { useEffect } from "react";
 
 const inputClass = "w-full rounded-lg border border-gray-300 px-4 py-3";
 
-export default function ExperienceSection() {
+export default function ExperienceSection({ onNext, onPrev }) {
   // const setExperience = useResumeStore((state) => state.setExperience);
+  const experience = useResumeStore((state) => state.experience);
   const updateSection = useResumeStore((state) => state.updateSection);
 
   const {
@@ -18,24 +21,60 @@ export default function ExperienceSection() {
     // watch,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: zodResolver(experienceSchema),
 
     defaultValues: {
-      experience: [
-        {
-          company: "",
-          jobTitle: "",
-          location: "",
-          startDate: "",
-          endDate: "",
-          isCurrent: false,
-          description: "",
-          technologies: "",
-        },
-      ],
+      experience:
+        experience.length > 0
+          ? experience.map((exp) => ({
+              ...exp,
+              technologies: Array.isArray(exp.technologies)
+                ? exp.technologies.join(", ")
+                : "",
+              description: Array.isArray(exp.description)
+                ? exp.description.join("\n")
+                : "",
+            }))
+          : [
+              {
+                company: "",
+                jobTitle: "",
+                location: "",
+                startDate: "",
+                endDate: "",
+                isCurrent: false,
+                description: "",
+                technologies: "",
+              },
+            ],
     },
   });
+
+  useEffect(() => {
+    reset({
+      experience:
+        experience.length > 0
+          ? experience.map((exp) => ({
+              ...exp,
+              technologies: exp.technologies.join(", "),
+              description: exp.description.join("\n"),
+            }))
+          : [
+              {
+                company: "",
+                jobTitle: "",
+                location: "",
+                startDate: "",
+                endDate: "",
+                isCurrent: false,
+                description: "",
+                technologies: "",
+              },
+            ],
+    });
+  }, [experience, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -61,6 +100,7 @@ export default function ExperienceSection() {
 
     // setExperience(transformedExperience);
     updateSection("experience", transformedExperience);
+    onNext();
   };
 
   return (
@@ -88,7 +128,7 @@ export default function ExperienceSection() {
             // control={control}
             errors={errors}
             remove={remove}
-            // isCurrent={isCurrent}
+            // isCurrent={watch(`experience.${index}.isCurrent`)}
           />
         );
       })}
@@ -128,6 +168,7 @@ export default function ExperienceSection() {
       >
         Save
       </button> */}
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );

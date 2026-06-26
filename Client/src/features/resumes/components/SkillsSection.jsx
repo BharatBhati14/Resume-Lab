@@ -5,22 +5,34 @@ import { skillsSchema } from "../schema/resume.schema";
 import { useResumeStore } from "../store/resumeStore";
 
 import SaveButton from "../../../shared/components/SaveButton";
+import PreviousButton from "../../../shared/components/PreviousButton";
+import { useEffect } from "react";
 
-export default function SkillsSection() {
+export default function SkillsSection({ onNext, onPrev }) {
+  const skills = useResumeStore((state) => state.skills);
   const updateSection = useResumeStore((state) => state.updateSection);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(skillsSchema),
     defaultValues: {
-      technical: "",
-      soft: "",
-      tools: "",
+      technical: skills.technical.join(", "),
+      soft: skills.soft.join(", "),
+      tools: skills.tools.join(", "),
     },
   });
+
+  useEffect(() => {
+    reset({
+      technical: skills.technical.join(", "),
+      soft: skills.soft.join(", "),
+      tools: skills.tools.join(", "),
+    });
+  }, [skills, reset]);
 
   const onSubmit = (data) => {
     const transformedSkills = {
@@ -43,6 +55,7 @@ export default function SkillsSection() {
     updateSection("skills", transformedSkills);
 
     console.log(transformedSkills);
+    onNext();
   };
 
   return (
@@ -118,6 +131,7 @@ export default function SkillsSection() {
         </div>
       </div>
 
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );

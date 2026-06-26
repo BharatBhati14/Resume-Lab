@@ -35,21 +35,6 @@ const initialState = {
   languages: [],
 };
 
-// const updateSection =
-//   useResumeStore(
-//     (state) => state.updateSection
-//   );
-
-// updateSection(
-//   "experience",
-//   transformedExperience
-// );
-
-// updateSection(
-//   "education",
-//   educationData
-// );
-
 export const useResumeStore = create(
   persist(
     (set) => ({

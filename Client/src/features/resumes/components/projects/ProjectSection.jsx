@@ -4,8 +4,12 @@ import { ProjectCard } from "./ProjectCard";
 import SaveButton from "../../../../shared/components/SaveButton";
 import { projectsSchema } from "../../schema/resume.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import PreviousButton from "../../../../shared/components/PreviousButton";
+import { useEffect } from "react";
+import {mapProjectsToForm} from "../../utils/mapProjectsToForm"
 
-export default function ProjectSection() {
+export default function ProjectSection({ onNext, onPrev }) {
+  const projects = useResumeStore((state) => state.projects);
   const updateSection = useResumeStore((state) => state.updateSection);
 
   const {
@@ -13,20 +17,19 @@ export default function ProjectSection() {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(projectsSchema),
     defaultValues: {
-      projects: [
-        {
-          title: "",
-          description: "",
-          technologies: "",
-          liveUrl: "",
-          githubUrl: "",
-        },
-      ],
+      projects: mapProjectsToForm(projects),
     },
   });
+
+  useEffect(() => {
+    reset({
+      projects: mapProjectsToForm(projects),
+    });
+  }, [projects, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -51,6 +54,7 @@ export default function ProjectSection() {
     updateSection("projects", transformedProjects);
 
     console.log(transformedProjects);
+    onNext();
   };
 
   return (
@@ -102,14 +106,13 @@ export default function ProjectSection() {
         Add Project
       </button>
 
-      
-
       {/* <button
         type="submit"
         className="rounded-lg bg-blue-600 px-5 py-2 text-white"
       >
         Save
       </button> */}
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );

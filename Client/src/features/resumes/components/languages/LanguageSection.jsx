@@ -5,27 +5,37 @@ import { languagesSchema } from "../../schema/resume.schema";
 import { LanguageCard } from "./LanguageCard";
 import { useResumeStore } from "../../store/resumeStore";
 import SaveButton from "../../../../shared/components/SaveButton";
+import PreviousButton from "../../../../shared/components/PreviousButton";
+import { useEffect } from "react";
 
-export default function LanguageSection() {
+export default function LanguageSection({ onPrev }) {
+  const languages = useResumeStore((state) => state.languages);
   const updateSection = useResumeStore((state) => state.updateSection);
+
+  const emptyLanguage = {
+    name: "",
+    proficiency: "",
+  };
 
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(languagesSchema),
 
     defaultValues: {
-      languages: [
-        {
-          name: "",
-          proficiency: "",
-        },
-      ],
+      languages: languages.length > 0 ? languages : [emptyLanguage],
     },
   });
+
+  useEffect(() => {
+    reset({
+      languages: languages.length > 0 ? languages : [emptyLanguage],
+    });
+  }, [languages, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -64,7 +74,9 @@ export default function LanguageSection() {
       ))}
 
       {fields.length >= 5 && (
-        <p className="text-sm text-gray-500 pl-6">Maximum 5 languages allowed.</p>
+        <p className="text-sm text-gray-500 pl-6">
+          Maximum 5 languages allowed.
+        </p>
       )}
 
       <button
@@ -86,6 +98,7 @@ export default function LanguageSection() {
         Add Language
       </button>
 
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );

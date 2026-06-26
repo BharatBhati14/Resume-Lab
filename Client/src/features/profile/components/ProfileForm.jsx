@@ -9,7 +9,7 @@ import { useResumeStore } from "../../resumes/store/resumeStore";
 const inputClass =
   "w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200";
 
-export default function ProfileForm() {
+export default function ProfileForm({ onNext, onPrev }) {
   // let profileData = {};
   const setPersonalInfo = useResumeStore((state) => state.setPersonalInfo);
 
@@ -48,6 +48,7 @@ export default function ProfileForm() {
     // profile = {...res}
     setPersonalInfo(data);
     // profileData = data;
+    onNext();
   };
 
   useEffect(() => {
@@ -66,6 +67,8 @@ export default function ProfileForm() {
       portfolio: profile.portfolio || "",
       profileImage: profile.profileImage || "",
     });
+
+    setPersonalInfo(profile);
   }, [profile, reset]);
 
   if (isLoading) return <div>Loading...</div>;
@@ -270,7 +273,10 @@ export default function ProfileForm() {
                 type="button"
                 disabled={!isValid}
                 className="rounded-lg bg-white px-6 py-2 text-md font-medium border-2 text-blue-900 border-blue-700 transition hover:bg-blue-700 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-0 disabled:text-white"
-                // onClick={()=>setPersonalInfo(profileData)}
+                onClick={handleSubmit((data) => {
+                  setPersonalInfo(data);
+                  onNext();
+                })}
               >
                 Next
               </button>

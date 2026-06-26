@@ -5,34 +5,44 @@ import { educationSchema } from "../../schema/resume.schema";
 import { EducationCard } from "./EducationCard";
 import { useResumeStore } from "../../store/resumeStore";
 import SaveButton from "../../../../shared/components/SaveButton";
+import PreviousButton from "../../../../shared/components/PreviousButton";
+import { useEffect } from "react";
 
-export default function EducationSection() {
+export default function EducationSection({ onNext, onPrev }) {
+  const education = useResumeStore((state) => state.education);
   const updateSection = useResumeStore((state) => state.updateSection);
+
+  const emptyEducation = {
+    institution: "",
+    degree: "",
+    fieldOfStudy: "",
+    location: "",
+    startDate: "",
+    endDate: "",
+    isCurrent: false,
+    grade: "",
+    description: "",
+  };
 
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(educationSchema),
 
     defaultValues: {
-      education: [
-        {
-          institution: "",
-          degree: "",
-          fieldOfStudy: "",
-          location: "",
-          startDate: "",
-          endDate: "",
-          isCurrent: false,
-          grade: "",
-          description: "",
-        },
-      ],
+      education: education.length > 0 ? education : [emptyEducation],
     },
   });
+
+  useEffect(() => {
+    reset({
+      education: education.length > 0 ? education : [emptyEducation],
+    });
+  }, [education, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -43,6 +53,7 @@ export default function EducationSection() {
     updateSection("education", data.education);
 
     console.log(data.education);
+    onNext();
   };
 
   return (
@@ -66,6 +77,7 @@ export default function EducationSection() {
           register={register}
           errors={errors}
           remove={remove}
+          // isCurrent={watch(`education.${index}.isCurrent`)}
         />
       ))}
 
@@ -101,6 +113,7 @@ export default function EducationSection() {
         Add Education
       </button>
 
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );

@@ -6,7 +6,6 @@ import AuthLayout from "../../features/auth/Layout/AuthLayout";
 import HomePage from "../../pages/HomePage";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import ResumeBuilderPage from "../../features/resumes/pages/ResumeBuilderPage";
-import PersonalInfoForm from "../../features/resumes/components/PersonalInfoForm";
 import ResumePreview from "../../features/resumes/components/ResumePreview";
 
 import LoginPage from "../../features/auth/pages/LoginPage";

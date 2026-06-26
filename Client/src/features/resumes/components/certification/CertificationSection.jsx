@@ -5,29 +5,41 @@ import { certificationsSchema } from "../../schema/resume.schema";
 import { CertificationCard } from "./CertificationCard";
 import { useResumeStore } from "../../store/resumeStore";
 import SaveButton from "../../../../shared/components/SaveButton";
+import PreviousButton from "../../../../shared/components/PreviousButton";
+import { useEffect } from "react";
 
-export default function CertificationSection() {
+export default function CertificationSection({ onNext, onPrev }) {
+  const certifications = useResumeStore((state) => state.certifications);
   const updateSection = useResumeStore((state) => state.updateSection);
+
+  const emptyCertification = {
+    name: "",
+    issuer: "",
+    issueDate: "",
+    url: "",
+  };
 
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(certificationsSchema),
 
     defaultValues: {
-      certifications: [
-        {
-          name: "",
-          issuer: "",
-          issueDate: "",
-          url: "",
-        },
-      ],
+      certifications:
+        certifications.length > 0 ? certifications : [emptyCertification],
     },
   });
+
+  useEffect(() => {
+    reset({
+      certifications:
+        certifications.length > 0 ? certifications : [emptyCertification],
+    });
+  }, [certifications, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -38,6 +50,7 @@ export default function CertificationSection() {
     updateSection("certifications", data.certifications);
 
     console.log(data.certifications);
+    onNext();
   };
 
   return (
@@ -92,6 +105,7 @@ export default function CertificationSection() {
         Add Certification
       </button>
 
+      <PreviousButton onPrev={onPrev} />
       <SaveButton />
     </form>
   );
