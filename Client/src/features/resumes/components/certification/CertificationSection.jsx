@@ -84,29 +84,33 @@ export default function CertificationSection({ onNext, onPrev }) {
         </p>
       )}
 
-      <button
-        type="button"
-        disabled={fields.length >= 5}
-        onClick={() =>
-          append({
-            name: "",
-            issuer: "",
-            issueDate: "",
-            url: "",
-          })
-        }
-        className={`rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-8">
+        <button
+          type="button"
+          disabled={fields.length >= 5}
+          onClick={() =>
+            append({
+              name: "",
+              issuer: "",
+              issueDate: "",
+              url: "",
+            })
+          }
+          className={`rounded-lg border border-blue-600 px-4.5 py-2.5 mx-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50
         ${
           fields.length >= 5
             ? "cursor-not-allowed border-gray-300 text-gray-400 hover:bg-white"
             : "cursor-pointer"
         }`}
-      >
-        Add Certification
-      </button>
+        >
+          Add Certification
+        </button>
 
-      <PreviousButton onPrev={onPrev} />
-      <SaveButton />
+        <div>
+          <PreviousButton onPrev={onPrev} />
+          <SaveButton />
+        </div>
+      </div>
     </form>
   );
 }

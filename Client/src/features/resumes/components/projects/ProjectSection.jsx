@@ -6,7 +6,7 @@ import { projectsSchema } from "../../schema/resume.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PreviousButton from "../../../../shared/components/PreviousButton";
 import { useEffect } from "react";
-import {mapProjectsToForm} from "../../utils/mapProjectsToForm"
+import { mapProjectsToForm } from "../../utils/mapProjectsToForm";
 
 export default function ProjectSection({ onNext, onPrev }) {
   const projects = useResumeStore((state) => state.projects);
@@ -84,36 +84,40 @@ export default function ProjectSection({ onNext, onPrev }) {
         <p className="text-sm text-gray-500">Maximum 3 projects allowed.</p>
       )}
 
-      <button
-        type="button"
-        disabled={fields.length >= 3}
-        onClick={() =>
-          append({
-            title: "",
-            description: "",
-            technologies: "",
-            liveUrl: "",
-            githubUrl: "",
-          })
-        }
-        className={`rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-8">
+        <button
+          type="button"
+          disabled={fields.length >= 3}
+          onClick={() =>
+            append({
+              title: "",
+              description: "",
+              technologies: "",
+              liveUrl: "",
+              githubUrl: "",
+            })
+          }
+          className={`rounded-lg border border-blue-600 px-4.5 py-2.5 mx-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
     ${
       fields.length >= 3
         ? "cursor-not-allowed border-gray-300 text-gray-400 hover:bg-white"
         : "cursor-pointer"
     }`}
-      >
-        Add Project
-      </button>
+        >
+          Add More Projects
+        </button>
 
-      {/* <button
+        {/* <button
         type="submit"
         className="rounded-lg bg-blue-600 px-5 py-2 text-white"
       >
         Save
       </button> */}
-      <PreviousButton onPrev={onPrev} />
-      <SaveButton />
+        <div>
+          <PreviousButton onPrev={onPrev} />
+          <SaveButton />
+        </div>
+      </div>
     </form>
   );
 }

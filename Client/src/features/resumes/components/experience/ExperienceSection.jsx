@@ -21,7 +21,7 @@ export default function ExperienceSection({ onNext, onPrev }) {
     // watch,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm({
     resolver: zodResolver(experienceSchema),
 
@@ -137,39 +137,43 @@ export default function ExperienceSection({ onNext, onPrev }) {
         <p className="text-sm text-gray-500">Maximum 5 Experiences allowed.</p>
       )}
 
-      <button
-        type="button"
-        disabled={fields.length >= 5}
-        onClick={() =>
-          append({
-            company: "",
-            jobTitle: "",
-            location: "",
-            startDate: "",
-            endDate: "",
-            isCurrent: false,
-            description: "",
-            technologies: "",
-          })
-        }
-        className={`rounded-lg border border-blue-600 px-4.5 py-2.5 ml-6 text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-8">
+        <button
+          type="button"
+          disabled={fields.length >= 5}
+          onClick={() =>
+            append({
+              company: "",
+              jobTitle: "",
+              location: "",
+              startDate: "",
+              endDate: "",
+              isCurrent: false,
+              description: "",
+              technologies: "",
+            })
+          }
+          className={`rounded-lg border border-blue-600 px-4.5 py-2.5 mx-6  text-[1rem] font-medium text-blue-600 hover:bg-blue-50 
     ${
       fields.length >= 5
         ? "cursor-not-allowed border-gray-300 text-gray-400 hover:bg-white"
         : "cursor-pointer"
     }`}
-      >
-        Add More Experience
-      </button>
+        >
+          Add More Experience
+        </button>
 
-      {/* <button
+        {/* <button
         type="submit"
         className="rounded-lg bg-blue-600 px-5 py-2.5 ml-6 font-medium text-white hover:bg-blue-700 cursor-pointer"
       >
         Save
       </button> */}
-      <PreviousButton onPrev={onPrev} />
-      <SaveButton />
+        <div>
+          <PreviousButton onPrev={onPrev} />
+          <SaveButton />
+        </div>
+      </div>
     </form>
   );
 }

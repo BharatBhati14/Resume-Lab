@@ -131,8 +131,10 @@ export default function SkillsSection({ onNext, onPrev }) {
         </div>
       </div>
 
-      <PreviousButton onPrev={onPrev} />
-      <SaveButton />
+      <div className="flex justify-between md:justify-end mb-8">
+        <PreviousButton onPrev={onPrev} />
+        <SaveButton />
+      </div>
     </form>
   );
 }
