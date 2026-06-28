@@ -47,21 +47,21 @@ export const useResumeStore = create(
 
       setPersonalInfo: (personalInfo) => set({ personalInfo }),
 
-      setTitle: (title) => set({ title }),
+      // setTitle: (title) => set({ title }),
 
-      setSummary: (summary) => set({ summary }),
+      // setSummary: (summary) => set({ summary }),
 
-      setExperience: (experience) => set({ experience }),
+      // setExperience: (experience) => set({ experience }),
 
-      setEducation: (education) => set({ education }),
+      // setEducation: (education) => set({ education }),
 
-      setProjects: (projects) => set({ projects }),
+      // setProjects: (projects) => set({ projects }),
 
-      setSkills: (skills) => set({ skills }),
+      // setSkills: (skills) => set({ skills }),
 
-      setCertifications: (certifications) => set({ certifications }),
+      // setCertifications: (certifications) => set({ certifications }),
 
-      setLanguages: (languages) => set({ languages }),
+      // setLanguages: (languages) => set({ languages }),
 
       resetResume: () => set(initialState),
     }),

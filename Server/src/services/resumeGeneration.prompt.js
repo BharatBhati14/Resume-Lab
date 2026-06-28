@@ -9,14 +9,19 @@ export const generateResumePrompt = (profile) => {
 
         {
             "summary": "",
-            "skills": [],
+            "skills": {
+                technical: [],
+                soft: [(max 5) if empty then remain it empty],
+                tools: [(max 5) if empty then remain it empty],
+            },
             "experience": [
                 {
                 "jobTitle": "",
                 "company": "",
                 "startDate": "",
                 "endDate": "",
-                "description": ["bullets"]
+                "description": ["bullets"],
+                "technologies": []
                 }
             ],
             "projects": [
@@ -24,13 +29,6 @@ export const generateResumePrompt = (profile) => {
                 "name": "",
                 "description": ["bullets"],
                 "technologies": []
-                }
-            ],
-            "education": [
-                {
-                "institution": "",
-                "degree": "",
-                "year": ""
                 }
             ]
         }
@@ -54,4 +52,12 @@ export const generateResumePrompt = (profile) => {
 
         Return valid JSON only.
     `;
+
+  //  "education": [
+  //             {
+  //             "institution": "",
+  //             "degree": "",
+  //             "year": ""
+  //             }
+  //         ]
 };

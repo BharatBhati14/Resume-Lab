@@ -1,30 +1,36 @@
-// createResume.js
-
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import {updateResumeData} from "../hooks/useUpdateResume"
 
-export const createResume = async (data) => {
-  const response = await axios.post(
-    "/api/resumes",
-    data
-  );
-
-  return response.data;
+export const useGenerateResume = () => {
+  return useMutation({
+    mutationFn: async (payload) => {
+      const { data } = await axios.post("/api/ai/resumes/generate", payload);
+      console.log(data);
+      return data;
+    },
+    onSuccess: (response) => {
+      updateResumeData(response.data);
+    },
+  });
 };
 
-// getResume.js
+export const useSaveResume = () => {
+  return useMutation({
+    mutationFn: async (payload) => {
+      const { data } = await axios.post("/api/ai/resumes/save", payload);
 
-import axios from "axios";
-
-export const getResume = async (id) => {
-  const response = await axios.get(
-    `/api/resumes/${id}`
-  );
-
-  return response.data;
+      return data.resume;
+    },
+  });
 };
 
-// Frontend
-//     ↓
-// API Layer
-//     ↓
-// Backend
+export const useRegenerateSection = () => {
+  return useMutation({
+    mutationFn: async (payload) => {
+      const { data } = await axios.post("/api/ai/resumes/regenerate", payload);
+
+      return data;
+    },
+  });
+};

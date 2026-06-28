@@ -6,7 +6,7 @@ import AuthLayout from "../../features/auth/Layout/AuthLayout";
 import HomePage from "../../pages/HomePage";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import ResumeBuilderPage from "../../features/resumes/pages/ResumeBuilderPage";
-import ResumePreview from "../../features/resumes/components/ResumePreview";
+import ResumePreview from "../../features/resumes/pages/ResumePreview";
 
 import LoginPage from "../../features/auth/pages/LoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
@@ -15,6 +15,7 @@ import useAuthStore from "../store/authStore";
 import { currentUser } from "../../features/auth/api/authApi";
 import { useQuery } from "@tanstack/react-query";
 import ProfileForm from "../../features/profile/components/ProfileForm";
+import ResumeForm from "../../features/resumes/components/ResumeForm";
 
 function ProtectedRoute({ children }) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);

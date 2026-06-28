@@ -1,52 +1,21 @@
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useGenerateResume, useSaveResume } from "../hooks/useResume";
-import ProfileForm from "../../profile/components/ProfileForm";
+import { useGenerateResume, useSaveResume } from "../api/resumeApi";
+import { toSendResumeData } from "../hooks/useToSendResumeData";
+import { useResumeStore } from "../store/resumeStore";
 
-export default function ResumeForm({ setResumeData }) {
-//   const generateResume = useGenerateResume();
-//   const saveResume = useSaveResume();
+export default function ResumeForm() {
+  // const saveResume = useSaveResume();
 
-//   const { register, reset } = useForm({
-//     defaultValues: {
-//       title: "",
+  const resumeData = toSendResumeData();
+  // console.log(setResumeData)
 
-//       personalInfo: {
-//         fullName: "",
-//         email: "",
-//         phone: "",
-//       },
-
-//       summary: "",
-//     },
-//   });
-
-//   const values = watch();
-
-//   useEffect(() => {
-    // setResumeData(values);
-//   }, [values]);
-
-    const {register} = useForm()
+  // const data  = generateResume.mutate(resumeData);
+  const handleGenerate = () => {
+    generateResume.mutate(resumeData);
+  };
 
   return (
-    <div className="bg-white  rounded-xl shadow ">
-      <ProfileForm />
-
-      <input
-        {...register("title")}
-        placeholder="Resume Title"
-        className="w-full border p-3 rounded mb-3"
-      />
-
-
-      <textarea
-        {...register("summary")}
-        placeholder="Professional Summary"
-        className="w-full border p-3 rounded h-32"
-      />
-
-      
+    <div>
+      <button onClick={handleGenerate}>Generate Resume</button>
     </div>
   );
 }

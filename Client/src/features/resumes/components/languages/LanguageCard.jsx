@@ -5,7 +5,7 @@ export function LanguageCard({ index, register, errors, remove }) {
   const errorClass = "mt-1 mb-4 text-sm text-red-500";
 
   return (
-    <div className="rounded-2xl border-2 border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition space-y-4">
+    <div className="w-100 rounded-2xl border-2 border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition space-y-4">
       <div className="flex items-center justify-between pb-4">
         <h3 className="text-xl font-semibold text-gray-900">
           Language {index + 1}

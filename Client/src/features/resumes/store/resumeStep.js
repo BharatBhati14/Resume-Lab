@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export const useStepStore = create(
   persist(
@@ -10,7 +10,7 @@ export const useStepStore = create(
     }),
     {
       name: "resume-step",
-      //   storage: createJSONStorage(() => sessionStorage),
+        storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );
