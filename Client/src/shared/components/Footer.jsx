@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  const isPreviewPage = location.pathname === "/preview";
+
+  if (isPreviewPage) return null;
   return (
     <footer className="bg-slate-950 text-white pt-16 pb-10 sm:pt-20 sm:pb-12">
       <div className="max-w-7xl mx-auto px-6">

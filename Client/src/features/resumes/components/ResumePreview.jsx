@@ -15,7 +15,11 @@ export default function ResumePreview() {
   } = useResumeStore();
 
   return (
-    <div className="mx-auto w-[210mm] min-h-[297mm] bg-white p-10 font-sans text-black leading-relaxed">
+    // <div className="mx-auto w-[210mm] min-h-[297mm] bg-white p-10 font-sans text-black leading-relaxed">
+    <div
+      className="mx-auto w-[210mm] min-h-[297mm] bg-white p-10 font-sans text-black leading-relaxed  
+                     border border-gray-300 "
+    >
       {/* Header */}
       <header className="border-b border-black pb-4">
         <h1 className="text-3xl font-bold">{personalInfo.fullName}</h1>
@@ -60,7 +64,7 @@ export default function ResumePreview() {
                   <div>
                     <h4 className="text-base font-bold">{exp.jobTitle}</h4>
 
-                    <p className="text-sm">
+                    <p className="text-sm ">
                       {exp.company}
                       {exp.location && ` | ${exp.location}`}
                     </p>
@@ -182,7 +186,7 @@ export default function ResumePreview() {
               <div key={index}>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h4 className="text-base font-bold">
+                    <h4 className="text-base font-bold capitalize">
                       {edu.degree}
                       {edu.fieldOfStudy && ` in ${edu.fieldOfStudy}`}
                     </h4>

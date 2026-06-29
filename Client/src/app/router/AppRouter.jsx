@@ -4,22 +4,21 @@ import MainLayout from "../../shared/layouts/MainLayout";
 import AuthLayout from "../../features/auth/Layout/AuthLayout";
 
 import HomePage from "../../pages/HomePage";
+import ProfileForm from "../../features/profile/components/ProfileForm";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import ResumeBuilderPage from "../../features/resumes/pages/ResumeBuilderPage";
-import ResumePreview from "../../features/resumes/pages/ResumePreview";
+import ResumePreviewPage from "../../features/resumes/pages/ResumePreviewPage";
 
 import LoginPage from "../../features/auth/pages/LoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
+import ResumeForm from "../../features/resumes/components/ResumeForm";
 
 import useAuthStore from "../store/authStore";
 import { currentUser } from "../../features/auth/api/authApi";
 import { useQuery } from "@tanstack/react-query";
-import ProfileForm from "../../features/profile/components/ProfileForm";
-import ResumeForm from "../../features/resumes/components/ResumeForm";
 
 function ProtectedRoute({ children }) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
-  
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
@@ -41,6 +40,7 @@ function AppRouter() {
         {/* MainLayout */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+
           <Route
             path="/dashboard"
             element={
@@ -49,6 +49,7 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/profile"
             element={
@@ -67,7 +68,14 @@ function AppRouter() {
           />
 
           {/* <Route path="/resume" element={<ResumeBuilderPage />} /> */}
-          <Route path="/preview" element={<ResumePreview />} />
+          <Route
+            path="/preview"
+            element={
+              <ProtectedRoute>
+                <ResumePreviewPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* GET resume */}
