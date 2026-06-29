@@ -268,7 +268,7 @@ export default function ResumePreview() {
             Languages
           </h3>
 
-          <p className="text-sm">
+          <p className="text-sm capitalize">
             {languages
               .map((lang) => `${lang.name} (${lang.proficiency})`)
               .join(" | ")}

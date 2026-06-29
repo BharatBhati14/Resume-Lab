@@ -52,7 +52,7 @@ function ResumePreviewPage() {
           <div className="flex gap-5 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur border border-gray-300">
             {/* Edit */}
             <Link
-              to="/resume"
+              to="/resume/edit"
               className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
             >
               <svg

@@ -67,6 +67,15 @@ function AppRouter() {
             }
           />
 
+          <Route
+            path="/resume/edit"
+            element={
+              <ProtectedRoute>
+                <ResumeBuilderPage />
+              </ProtectedRoute>
+            }
+          />
+
           {/* <Route path="/resume" element={<ResumeBuilderPage />} /> */}
           <Route
             path="/preview"
