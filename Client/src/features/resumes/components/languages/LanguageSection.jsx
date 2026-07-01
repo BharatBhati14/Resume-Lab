@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { toSendResumeData } from "../../hooks/useToSendResumeData";
 import { useGenerateResume } from "../../api/resumeApi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Spinner from "../../../../shared/components/Spinner";
 
 export default function LanguageSection({ onPrev }) {
   const location = useLocation();
@@ -61,6 +62,10 @@ export default function LanguageSection({ onPrev }) {
     if (!isResumePage) navigate("/preview");
   };
 
+  if (generateResumeMutation.isPending) {
+    return <Spinner />;
+  }
+
   return (
     <div className="">
       <form
@@ -76,6 +81,13 @@ export default function LanguageSection({ onPrev }) {
             Add languages you can communicate in.
           </p>
         </div>
+
+        {fields.length === 1 && (
+          <p className="mb-2 mx-2 md:mx-0 rounded-lg border border-blue-200 bg-blue-50 p-3 text-[1rem] text-blue-800">
+            Languages are optional. If you don't want to include it, click the{" "}
+            <span className="font-semibold "> Remove</span> button.
+          </p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 m-6">
           {fields.map((field, index) => (

@@ -116,6 +116,14 @@ export default function ExperienceSection({ onNext, onPrev }) {
           Add your job and experience details.
         </p>
       </div>
+      {fields.length === 1 && (
+        <p className="mb-2 mx-2 md:mx-0 rounded-lg border border-blue-200 bg-blue-50 p-3 text-[1rem] text-blue-800">
+          Work experience is optional. If you don't want to include it, click
+          the
+          <span className="font-semibold "> Remove</span> button.
+        </p>
+      )}
+
       {fields.map((field, index) => {
         const isCurrent = false;
         // watch(`experience.${index}.isCurrent`);

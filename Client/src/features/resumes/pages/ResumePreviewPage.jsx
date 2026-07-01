@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ResumePreview from "../components/ResumePreview";
 import { useResumeStore } from "../store/resumeStore";
 import { Link } from "react-router-dom";
@@ -9,11 +9,10 @@ import handleDownload from "../utils/exportPDF";
 // import "../../../../src/index.css";
 
 function ResumePreviewPage() {
-  const resumeMutation = useGenerateResume();
+  // const resumeMutation = useGenerateResume();
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const hasResume = sessionStorage.getItem("resume-builder");
-
-  
 
   //   console.log(hasResume);
   if (!hasResume) {
@@ -41,9 +40,14 @@ function ResumePreviewPage() {
     );
   }
 
-  if (resumeMutation.isPending) {
-    return <Spinner />;
-  }
+  const downloadResume = async () => {
+    try {
+      setIsDownloading(true);
+      await handleDownload();
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <>
@@ -80,22 +84,32 @@ function ResumePreviewPage() {
 
             {/* Download */}
             <button
-              onClick={handleDownload}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 cursor-pointer"
+              onClick={downloadResume}
+              disabled={isDownloading}
+              className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-800 cursor-pointer disabled:cursor-not-allowed disabled:bg-blue-400"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <path d="M7 10l5 5 5-5" />
-                <path d="M12 15V3" />
-              </svg>
-              Download PDF
+              {isDownloading ? (
+                <>
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  Preparing PDF...
+                </>
+              ) : (
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <path d="M7 10l5 5 5-5" />
+                    <path d="M12 15V3" />
+                  </svg>
+                  Download PDF
+                </>
+              )}
             </button>
           </div>
         </div>

@@ -1,25 +1,6 @@
 import z from "zod";
 import { personalInfoSchema } from "../../profile/schemas/personalInfo.schema";
 
-// export const resumeSchema = z.object({
-//   personalInfo: personalInfoSchema,
-//   experience: z.array(
-//     z.object({
-//       company: z.string().min(1),
-//       role: z.string().min(1),
-//       startDate: z.string(),
-//       endDate: z.string().optional(),
-//       description: z.string().optional(),
-//     }),
-//   ),
-
-//   education: z.array(z.any()),
-
-//   projects: z.array(z.any()),
-
-//   skills: z.object({}).optional(),
-// });
-
 // ********** Title & Summary Schema **********
 export const titleSummarySchema = z.object({
   title: z
@@ -32,7 +13,7 @@ export const titleSummarySchema = z.object({
     .string()
     .trim()
     // .min(20, "Summary should be at least 20 characters")
-    .max(300, "Summary cannot exceed 1000 characters"),
+    .max(500, "Summary cannot exceed 1200 characters"),
 });
 
 // ********** Experience Schema **********
@@ -100,7 +81,7 @@ export const experienceItemSchema = z
 export const experienceSchema = z.object({
   experience: z
     .array(experienceItemSchema)
-    .min(1, "Add at least one experience")
+    // .min(1, "Add at least one experience")
     .max(5, "Maximum 5 experiences allowed"),
 });
 
@@ -116,7 +97,7 @@ export const projectItemSchema = z.object({
     .string()
     .trim()
     .min(20, "Description must be 20 characters long")
-    .max(300, "Project description is too long"),
+    .max(500, "Project description is too long"),
 
   technologies: z
     .string()
@@ -224,6 +205,8 @@ export const educationSchema = z.object({
     .max(3, "Maximum 5 education entries allowed"),
 });
 
+
+// ********** Skills Schema **********
 export const skillsSchema = z.object({
   technical: z
     .string()

@@ -16,7 +16,7 @@ function LoginPage() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       login()
-      navigate("/dashboard");
+      navigate("/resume");
       // console.log(useAuthStore.getState().isLoggedIn)
     },
   });

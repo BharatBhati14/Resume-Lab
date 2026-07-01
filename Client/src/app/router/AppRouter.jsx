@@ -11,7 +11,6 @@ import ResumePreviewPage from "../../features/resumes/pages/ResumePreviewPage";
 
 import LoginPage from "../../features/auth/pages/LoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
-import ResumeForm from "../../features/resumes/components/ResumeForm";
 
 import useAuthStore from "../store/authStore";
 import { currentUser } from "../../features/auth/api/authApi";

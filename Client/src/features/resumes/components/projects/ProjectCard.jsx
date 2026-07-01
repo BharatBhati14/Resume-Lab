@@ -10,13 +10,15 @@ export function ProjectCard({ index, register, errors, remove }) {
           Project {index + 1}
         </h3>
 
-        <button
-          type="button"
-          onClick={() => remove(index)}
-          className="rounded-lg px-3 py-2 text-[1rem] font-medium text-red-600 hover:bg-red-50 cursor-pointer"
-        >
-          Remove
-        </button>
+        {index > 0 && (
+          <button
+            type="button"
+            onClick={() => remove(index)}
+            className="rounded-lg px-3 py-2 text-[1rem] font-medium text-red-600 hover:bg-red-50 cursor-pointer"
+          >
+            Remove
+          </button>
+        )}
       </div>
 
       <div>

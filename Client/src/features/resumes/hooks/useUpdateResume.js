@@ -39,17 +39,3 @@ export const updateResumeData = (generatedData) => {
   updateSection("experience", updatedExperience);
   updateSection("projects", updatedProjects);
 };
-
-// getResume.js
-
-// export const getResume = async (id) => {
-//   const response = await axios.get(`/api/resumes/${id}`);
-
-//   return response.data;
-// };
-
-// Frontend
-//     ↓
-// API Layer
-//     ↓
-// Backend

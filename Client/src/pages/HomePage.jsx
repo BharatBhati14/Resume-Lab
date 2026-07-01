@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroImg from "../assets/heroimg2.png";
+import heroImg from "../assets/heroImg3.webp";
 import { useState } from "react";
 
 const HomePage = () => {
@@ -212,7 +212,7 @@ const HomePage = () => {
                   AI Powered Resume Builder
                 </span>
 
-                <h1 className="max-w-2xl mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="max-w-2xl mt-6 text-4xl sm:text-5xl lg:text-6xl mx-auto font-bold leading-tight">
                   Build a Professional Resume That Gets Interviews
                 </h1>
 
@@ -263,7 +263,7 @@ const HomePage = () => {
                   <img
                     src={heroImg}
                     alt="Resume Preview"
-                    className="w-full rounded-3xl "
+                    className="w-full rounded-3xl  border-none"
                   />
                 </div>
               </div>
@@ -288,7 +288,7 @@ const HomePage = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="p-10 text-center border-slate-200
+                  className="p-10 text-center border border-slate-200
                          md:not-nth-[3n]:border-r
                          nth-[-n+3]:md:border-b hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >

@@ -21,13 +21,13 @@ function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8">
-          <Link to="/dashboard" className="hover:text-blue-900 cursor-pointer">
-            Dashboard
+          <Link to="/" className="hover:text-blue-900 cursor-pointer">
+            Home
           </Link>
-          <Link
-            to="/resume"
-            className="hover:text-blue-900 cursor-pointer"
-          >
+          {/* <Link to="/dashboard" className="hover:text-blue-900 cursor-pointer">
+            Dashboard
+          </Link> */}
+          <Link to="/resume" className="hover:text-blue-900 cursor-pointer">
             Build Resume
           </Link>
           <Link to="/preview" className="hover:text-blue-900 cursor-pointer">
@@ -103,12 +103,13 @@ function Header() {
       {isOpen && (
         <div className="absolute top-full left-0 w-full backdrop-blur-xl bg-white shadow-lg border-t border-slate-200 md:hidden">
           <nav className="flex flex-col gap-4 p-4">
-            <Link
+            {/* <Link
               to="/dashboard"
               // className="hover:text-blue-900 cursor-pointer"
             >
               Dashboard
-            </Link>
+            </Link> */}
+            <Link to="/">Home</Link>
             <Link to="/resume">Build Resume</Link>
             <Link to="/preview"> Preview </Link>
             <Link to="/profile">Profile</Link>

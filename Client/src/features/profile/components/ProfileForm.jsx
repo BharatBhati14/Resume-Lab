@@ -15,6 +15,7 @@ export default function ProfileForm({ onNext, onPrev }) {
 
   const location = useLocation();
   const isResumePage = location.pathname === "/resume";
+  const isEditPage = location.pathname === "/resume/edit";
   const navigate = useNavigate();
 
   const { data: profile, isLoading } = getProfile();
@@ -268,7 +269,7 @@ export default function ProfileForm({ onNext, onPrev }) {
               Save Changes
             </button>
 
-            {isResumePage && (
+            {(isResumePage || isEditPage) && (
               <button
                 type="button"
                 disabled={!isValid}
