@@ -3,3 +3,80 @@
 html {
   scroll-behavior: smooth;
 }
+
+@page {
+  size: A4;
+}
+
+/* @page {
+  size: A4;
+  margin: 12mm;
+  /* padding: 10mm; ////////////
+}
+  */
+
+/* .print-only {
+  display: none;
+} */
+
+@media print {
+  .resume-viewport {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  /* .resume-scale-container {
+    width: auto !important;
+  } */
+
+  #resume {
+    zoom: 1 !important;
+  }
+
+  /* Hide everything except resume */
+  /* body * {
+    visibility: hidden;
+  } */
+
+  /* #resume,
+  #resume * {
+    visibility: visible;
+  } */
+
+  /* #resume {
+    /* position: absolute; ////////////////
+    left: 0;
+    top: 0;
+    width: 210mm;
+    padding: 10mm;
+    background: white;
+  } */
+
+  /* header {
+    margin-bottom:16px;
+} */
+
+  /* prevent breaks inside sections */
+  section {
+    margin-top: 20px;
+    /* break-inside: avoid; */
+    /* page-break-inside: avoid; */
+  }
+
+  /* .sticky {
+    display: none !important;
+  } */
+
+  /* better text rendering */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* .print-only {
+    display: block;
+  }
+  .no-print {
+    display: none !important;
+  } */
+}

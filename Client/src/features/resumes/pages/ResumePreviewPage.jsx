@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 import { useGenerateResume } from "../api/resumeApi";
 import Spinner from "../../../shared/components/Spinner";
 import ResumeViewport from "../components/ResumeViewport";
+import handleDownload from "../utils/exportPDF";
+// import "../../../../src/index.css";
 
 function ResumePreviewPage() {
   const resumeMutation = useGenerateResume();
 
   const hasResume = sessionStorage.getItem("resume-builder");
+
+  
+
   //   console.log(hasResume);
   if (!hasResume) {
     return (
@@ -47,6 +52,10 @@ function ResumePreviewPage() {
           <ResumePreview />
         </ResumeViewport>
 
+        {/* <div className="print-only">
+          <ResumePreview />
+        </div> */}
+
         {/* <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"> */}
         <div className="sticky bottom-4 z-50 mt-8 flex justify-center ">
           <div className="flex gap-5 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur border border-gray-300">
@@ -71,7 +80,7 @@ function ResumePreviewPage() {
 
             {/* Download */}
             <button
-              // onClick={handleDownload}
+              onClick={handleDownload}
               className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 cursor-pointer"
             >
               <svg

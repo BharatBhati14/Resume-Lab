@@ -7,7 +7,7 @@ export function ExperienceCard({
   //   control,
   errors,
   remove,
-  //   isCurrent,
+  isCurrent,
 }) {
   //   const {
   //     // fields: descriptionFields,
@@ -17,7 +17,7 @@ export function ExperienceCard({
   //     control,
   //     name: `experience.${index}.description`,
   //   });
-  const [isCurrent, setIsCurrent] = useState(false);
+  // const [isCurrent, setIsCurrent] = useState(false);
   const inputClass =
     "w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200";
   const errorClass = "mt-1 text-sm text-red-500";
@@ -118,7 +118,7 @@ export function ExperienceCard({
           type="checkbox"
           {...register(`experience.${index}.isCurrent`)}
           className="h-4 w-4 rounded border-gray-300 text-blue-600"
-          onClick={() => setIsCurrent((prev) => !prev)}
+          // onClick={() => setIsCurrent((prev) => !prev)}
         />
         I currently work here
       </label>

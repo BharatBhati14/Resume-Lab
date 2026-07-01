@@ -27,6 +27,7 @@ export default function EducationSection({ onNext, onPrev }) {
   const {
     register,
     control,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -77,7 +78,7 @@ export default function EducationSection({ onNext, onPrev }) {
           register={register}
           errors={errors}
           remove={remove}
-          // isCurrent={watch(`education.${index}.isCurrent`)}
+          isCurrent={watch(`education.${index}.isCurrent`)}
         />
       ))}
 

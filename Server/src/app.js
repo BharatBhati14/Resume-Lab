@@ -6,6 +6,7 @@ import morgan from "morgan";
 import authRouter from "./routes/auth.route.js";
 import resumeRouter from "./routes/resume.route.js";
 import profileRouter from "./routes/profile.route.js";
+import pdfRouter from "./features/puppeteerPdfFeature/pdf.route.js";
 
 const app = express();
 
@@ -32,9 +33,12 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", authRouter);
 
 // Resume Routes
-app.use("/api/ai/resumes", resumeRouter)
+app.use("/api/ai/resumes", resumeRouter);
 
 // Profile Routes
-app.use("/api/profile", profileRouter)
+app.use("/api/profile", profileRouter);
+
+// PDF generation Routes
+app.use("/api/pdf", pdfRouter);
 
 export default app;

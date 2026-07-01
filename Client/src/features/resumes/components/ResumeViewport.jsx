@@ -21,18 +21,18 @@ export default function ResumeViewport({ children }) {
   }, []);
 
   return (
-    <div className="flex justify-center overflow-auto py-6">
+    <div
+      className="resume-viewport flex justify-center overflow-auto "
+      // py-6
+    >
       <div
+        className="resume-scale-container"
         style={{
           width: PAGE_WIDTH * scale,
         }}
       >
         <div
-          //   style={{
-          //     width: PAGE_WIDTH,
-          //     transform: `scale(${scale})`,
-          //     transformOrigin: "top left",
-          //   }}
+          className="resume-scale"
           style={{
             zoom: scale,
           }}

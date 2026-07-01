@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Optional from "../../../../shared/components/Optional";
 
-export function EducationCard({ index, register, errors, remove }) {
-  const [isCurrent, setIsCurrent] = useState(false);
+export function EducationCard({ index, register, errors, remove, isCurrent, }) {
+  // const [isCurrent, setIsCurrent] = useState(false);
 
   const inputClass =
     "w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200";
@@ -104,7 +104,7 @@ export function EducationCard({ index, register, errors, remove }) {
         <input
           type="checkbox"
           {...register(`education.${index}.isCurrent`)}
-          onClick={() => setIsCurrent((prev) => !prev)}
+          // onClick={() => setIsCurrent((prev) => !prev)}
           className="h-4 w-4"
         />
         I am currently studying here
@@ -112,7 +112,9 @@ export function EducationCard({ index, register, errors, remove }) {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm font-medium">Grade / CGPA <Optional /></label>
+          <label className="mb-2 block text-sm font-medium">
+            Grade / CGPA <Optional />
+          </label>
 
           <input
             {...register(`education.${index}.grade`)}
@@ -121,7 +123,9 @@ export function EducationCard({ index, register, errors, remove }) {
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-medium">Location <Optional /></label>
+          <label className="mb-2 block text-sm font-medium">
+            Location <Optional />
+          </label>
 
           <input
             {...register(`education.${index}.location`)}
@@ -132,9 +136,12 @@ export function EducationCard({ index, register, errors, remove }) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium">Description <span className="text-[14px] font-normal text-gray-500 pl-1 italic">
+        <label className="mb-2 block text-sm font-medium">
+          Description{" "}
+          <span className="text-[14px] font-normal text-gray-500 pl-1 italic">
             (optional but recommended)
-          </span></label>
+          </span>
+        </label>
 
         <textarea
           rows={3}

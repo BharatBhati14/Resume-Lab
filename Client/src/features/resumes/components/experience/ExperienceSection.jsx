@@ -18,7 +18,7 @@ export default function ExperienceSection({ onNext, onPrev }) {
   const {
     register,
     control,
-    // watch,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -128,7 +128,7 @@ export default function ExperienceSection({ onNext, onPrev }) {
             // control={control}
             errors={errors}
             remove={remove}
-            // isCurrent={watch(`experience.${index}.isCurrent`)}
+            isCurrent={watch(`experience.${index}.isCurrent`)}
           />
         );
       })}
