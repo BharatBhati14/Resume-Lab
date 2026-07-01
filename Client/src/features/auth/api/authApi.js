@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 export const apiClient = axios.create({
   baseURL: "/",
@@ -25,4 +26,13 @@ export const loginUser = async (data) => {
 export const currentUser = async (data) => {
   const response = await apiClient.get("/api/auth/me");
   return response.data;
+};
+
+// Logout
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: async () => {
+      await apiClient.post("/api/auth/logout");
+    },
+  });
 };

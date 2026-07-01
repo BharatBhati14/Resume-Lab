@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { updateResumeData } from "../hooks/useUpdateResume";
 
 export const useGenerateResume = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return useMutation({
     mutationFn: async (payload) => {
       const { data } = await axios.post("/api/ai/resumes/generate", payload);
@@ -13,7 +13,7 @@ export const useGenerateResume = () => {
     },
     onSuccess: (response) => {
       updateResumeData(response.data);
-      navigate("/preview");
+      // navigate("/preview");
     },
   });
 };

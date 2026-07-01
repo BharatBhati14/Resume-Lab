@@ -22,9 +22,21 @@ export default function LanguageSection({ onPrev }) {
   const resumeData = toSendResumeData();
   const generateResumeMutation = useGenerateResume();
 
-  const handleGenerate = () => {
-    generateResumeMutation.mutate(resumeData);
+  const handleGenerate = async () => {
+    try {
+      await generateResumeMutation.mutateAsync(resumeData);
+      navigate("/preview");
+    } catch (error) {
+      if (error.response?.status === 401) {
+        // console.log(error.response?.status);
+        navigate("/login");
+      }
+    }
   };
+
+  // const handleGenerate = () => {
+  //   generateResumeMutation.mutate(resumeData);
+  // };
 
   const emptyLanguage = {
     name: "",

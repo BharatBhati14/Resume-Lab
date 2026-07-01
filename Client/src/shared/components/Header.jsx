@@ -1,16 +1,35 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLogout } from "../../features/auth/api/authApi";
+import useAuthStore from "../../app/store/authStore";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const logout = useAuthStore((state) => state.logout);
+
+  const logoutMutation = useLogout();
+  const navigate = useNavigate();
 
   const location = useLocation();
-
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+
+  const handleLogout = async () => {
+    try {
+      await logoutMutation.mutateAsync();
+
+      sessionStorage.removeItem("resume-builder");
+      logout();
+      sessionStorage.removeItem("auth-storage");
+
+      navigate("/login", { replace: true });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     // <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
@@ -57,8 +76,13 @@ function Header() {
               </Link>
             </>
           ) : (
-            <button className="text-red-600 py-2 rounded-xl">
-              <Link to="/logout">Logout</Link>
+            <button
+              onClick={handleLogout}
+              className="text-red-600 py-2 rounded-xl hover:underline underline-offset-8 cursor-pointer"
+            >
+              {" "}
+              Logout
+              {/* <Link to="/logout">Logout</Link> */}
             </button>
           )}
         </div>
@@ -126,8 +150,12 @@ function Header() {
                 </button>
               </>
             ) : (
-              <button className="text-red-600 py-2 text-left rounded-xl">
-                <Link to="/logout">Logout</Link>
+              <button
+                onClick={handleLogout}
+                className="text-red-600 py-2 text-left rounded-xl"
+              >
+                Logout
+                {/* <Link to="/logout">Logout</Link> */}
               </button>
             )}
           </nav>
